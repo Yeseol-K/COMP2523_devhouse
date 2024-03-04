@@ -3,37 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const Card_js_1 = require("./model/Card.js");
-const path_1 = __importDefault(require("path"));
-const app = express_1.default();
-// Configure Express to use EJS
-app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
-app.use(express_1.default.urlencoded({ extended: true }));
-app.set("views", path_1.default.join(__dirname, "views"));
-app.set("view engine", "ejs");
-app.get("/", async (req, res) => {
-    let card = new Card_js_1.Card("mock title", "mock description", "www.theverge.com");
-    await card.generateImage();
-    res.render("index", {
-        cardList: [
-            {
-                cardTitle: card.cardTitle,
-                cardDescription: card.cardDescription,
-                cardImage: "http://free.pagepeeker.com/v2/thumbs.php?size=x&url=https%3A%2F%2Fdev.to",
-            },
-        ],
-    });
-});
-app.get("/addSite", (req, res) => {
-    res.render("addSite");
-});
-app.get("/test", (req, res) => {
-    let { cardTitle, cardDescription, cardUrl } = req.body;
-    // let card = new Card("mock title", "mock description", "www.theverge.com");
-    // return res.render()
-});
-app.listen(5000, () => {
-    console.log("server running on port 5000");
-});
+const App_1 = __importDefault(require("./App"));
+const post_controller_1 = __importDefault(require("./areas/post/controllers/post.controller"));
+const Authentication_controller_1 = __importDefault(require("./areas/authentication/controllers/Authentication.controller"));
+const Authentication_service_mock_1 = require("./areas/authentication/services/Authentication.service.mock");
+const services_1 = require("./areas/post/services");
+const Landing_controller_1 = __importDefault(require("./areas/landing/controllers/Landing.controller"));
+const server = new App_1.default([
+    new Landing_controller_1.default(),
+    new post_controller_1.default(new services_1.MockPostService()),
+    new Authentication_controller_1.default(new Authentication_service_mock_1.MockAuthenticationService()),
+    // new SettingController(new SettingService()),
+]);
+server.start();
 //# sourceMappingURL=server.js.map

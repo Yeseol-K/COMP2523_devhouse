@@ -1,59 +1,54 @@
 import express from "express";
-import cookieParser from "cookie-parser";
 import errorMiddleware from "./middleware/error.middleware";
 import Controller from "./interfaces/controller.interface";
-import path from "path";
+import dotenv from "dotenv";
+import livereload from "livereload";
+import path from "node:path";
 
 class App {
-  public app: express.Application;
-  public port: number | string = process.env.PORT || 5000;
+  private _app: express.Application;
+  private readonly _port: number = Number(process.env.PORT) || 5000;
 
   constructor(controllers: Controller[]) {
-    this.app = express();
+    dotenv.config();
 
-    // this.connectToTheDatabase();
+    this.initializeLiveReloadServer();
+    this._app = express();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
     this.initializeErrorHandling();
   }
 
-  public listen() {
-    this.app.listen(this.port, () => {
-      console.log(`App listening on the port ${this.port}`);
+  public start() {
+    this._app.listen(this._port, () => {
+      console.log(`App running at: http://localhost:${this._port}/ 🚀`);
     });
   }
 
-  public getServer() {
-    return this.app;
-  }
-
   private initializeMiddlewares() {
-    this.app.use(express.static(path.join(__dirname, "public")));
-    this.app.use(express.urlencoded());
-    this.app.use(express.json());
-    this.app.use(cookieParser());
-    this.app.set("views", path.join(__dirname, "views"));
-    this.app.set("view engine", "ejs");
+    require("./middleware/express.middlewares")(this._app);
+    require("./middleware/passport.middlewares")(this._app);
   }
 
   private initializeErrorHandling() {
-    this.app.use(errorMiddleware);
+    this._app.use(errorMiddleware);
   }
 
   private initializeControllers(controllers: Controller[]) {
     controllers.forEach((controller) => {
-      this.app.use("/", controller.router);
+      this._app.use("/", controller.router);
     });
   }
 
-  // private connectToTheDatabase() {
-  //   const {
-  //     MONGO_USER,
-  //     MONGO_PASSWORD,
-  //     MONGO_PATH,
-  //   } = process.env;
-  //   mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`);
-  // }
+  private initializeLiveReloadServer() {
+    const liveReloadServer = livereload.createServer();
+    liveReloadServer.watch(path.join(__dirname));
+    liveReloadServer.server.once("connection", () => {
+      setTimeout(() => {
+        liveReloadServer.refresh("/");
+      }, 100);
+    });
+  }
 }
 
 export default App;

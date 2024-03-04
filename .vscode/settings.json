@@ -1,0 +1,6 @@
+{
+  "maven.excludedFolders": ["**/.*", "**/node_modules", "**/target", "**/bin", "**/archetype-resources"],
+  "search.exclude": {
+    "**/dist": true
+  }
+}
