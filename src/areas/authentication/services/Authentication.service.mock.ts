@@ -8,18 +8,28 @@ export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
 
   public async getUserByEmailAndPassword(email: any, password: any): Promise<User | null> {
-    throw new Error("Method not yet implemented! ❌");
+    const user = Object.values(this._db).find((user) => user.email === email);
+    if (user && user.password === password) {
+      return user;
+    }
+    return null;
   }
 
   public async findUserByEmail(email: any): Promise<User | null> {
-    throw new Error("Method not yet implemented! ❌");
+    return Object.values(this._db).find((user) => user.email === email) || null;
   }
 
   public async createUser(user: UserDTO): Promise<User> {
-    throw new Error("Method not yet implemented! ❌");
+    const id = randomUUID();
+    const newUser: User = {
+      id,
+      ...user,
+    };
+    this._db[id] = newUser;
+    return newUser;
   }
 
   public async getUserById(id: any): Promise<User | null> {
-    throw new Error("Method not yet implemented! ❌");
+    return this._db[id] || null;
   }
 }

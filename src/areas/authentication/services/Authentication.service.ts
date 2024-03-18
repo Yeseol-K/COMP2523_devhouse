@@ -16,14 +16,31 @@ export class AuthenticationService implements IAuthenticationService {
   }
   async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
     // 🚀 Talk to your real database here
-    throw new Error("Method not implemented.");
+    const user = await this._db.prisma.user.findUnique({
+      where: {
+        email: email,
+        password: password,
+      },
+    });
+
+    if (!user) return null;
+    
+//check password
+    return user;
   }
   async createUser(user: UserDTO): Promise<User> {
     // 🚀 Talk to your real database here
-    throw new Error("Method not implemented.");
+    const newUser = await this._db.prisma.user.create({ data: user });
+    return newUser;
   }
 
-  getUserById(id: string): Promise<User | null> {
-    throw new Error("Method not implemented.");
+  async getUserById(id: string): Promise<User | null> {
+     // 🚀 Talk to your real database here
+    return await this._db.prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
   }
-}
+  }
+

@@ -30,13 +30,47 @@ export default class PassportConfig {
         usernameField: "email",
         passwordField: "password",
       },
-      async (email: any, password: any, done: any) => {
-        // use FormValidater in here
+      async (
+        email: string,
+        password: string,
+        done: (error: any, user?: any, options?: { message: string }) => void
+      ) => {
+
+        if (!FormValidater.IsEmpty(email) || !FormValidater.IsEmpty(password)) {
+          return done(null, false, { message: "Invalid email or password." });
+        }
+        
+        try {
+          const user = await this._authenticationService.getUserByEmailAndPassword(email, password);
+          if (!user) {
+            return done(null, false, { message: "Incorrect email or password." });
+          }
+          return done(null, user);
+        } catch (error) {
+          return done(error);
+        }
       }
     );
     this.registerStrategy(passport);
   }
-  registerStrategy(passport: any) {}
-  private serializeUser(passport: any) {}
-  private deserializeUser(passport: any) {}
-}
+  registerStrategy(passport: passport.PassportStatic) {
+    passport.use(this._name, this._strategy);
+    this.serializeUser(passport);
+    this.deserializeUser(passport);
+  }
+  private serializeUser(passport: passport.PassportStatic) {
+    passport.serializeUser((user: IUser, done) => {
+      done(null, user.id);
+    });
+  }
+  private deserializeUser(passport: passport.PassportStatic) {
+    passport.deserializeUser(async (id: string, done) => {
+      try {
+        const user = await this._authenticationService.getUserById(id);
+        done(null, user);
+      } catch (error) {
+        done(error);
+      }
+    });
+  }
+  }
