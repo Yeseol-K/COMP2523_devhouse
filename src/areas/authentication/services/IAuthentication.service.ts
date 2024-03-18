@@ -1,3 +1,5 @@
+//!!
+//@ts-ignore
 import type { User } from "@prisma/client";
 export type UserDTO = Omit<User, "id">;
 

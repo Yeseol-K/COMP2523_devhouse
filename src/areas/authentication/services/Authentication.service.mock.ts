@@ -1,25 +1,32 @@
-import { database } from "../../../model/fakeDB";
+import { database, userDatabase } from "../../../model/fakeDB";
 import { IAuthenticationService, UserDTO } from "./IAuthentication.service";
 import { randomUUID } from "node:crypto";
+//!!
+//@ts-ignore
 import type { User } from "@prisma/client";
 
-// FIXME: Don't forget: you shouldn't have the type "any"!
 export class MockAuthenticationService implements IAuthenticationService {
-  readonly _db = database;
+  readonly _db = userDatabase;
 
-  public async getUserByEmailAndPassword(email: any, password: any): Promise<User | null> {
-    throw new Error("Method not yet implemented! ❌");
+  public async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
+    return this._db.filter((user) => user.email === email && user.password === password)[0]
   }
 
-  public async findUserByEmail(email: any): Promise<User | null> {
-    throw new Error("Method not yet implemented! ❌");
+  public async findUserByEmail(email: string): Promise<User | null> {
+    return this._db.filter((user) => user.email === email)[0]
   }
 
   public async createUser(user: UserDTO): Promise<User> {
-    throw new Error("Method not yet implemented! ❌");
+    const id = randomUUID();
+    const newUser: User = {
+      id,
+      ...user,
+    };
+    this._db[id] = newUser;
+    return newUser;
   }
 
-  public async getUserById(id: any): Promise<User | null> {
-    throw new Error("Method not yet implemented! ❌");
+  public async getUserById(id: string): Promise<User | null> {
+    return userDatabase.filter((user) => user.id === id)[0]
   }
 }

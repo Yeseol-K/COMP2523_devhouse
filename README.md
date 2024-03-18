@@ -15,9 +15,8 @@ I also needed to research on Youtube and Google the following things:
 Kyle:
 I worked on the following tasks:
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+1. 2.5 hours on March 11th, reading over starter code and implementing passportConfig and authController
+2. 1 Hour on March 17th, finishing passportConfig (serialize, deserialize, register)
 
 I also needed to research on Youtube and Google the following things:
 
