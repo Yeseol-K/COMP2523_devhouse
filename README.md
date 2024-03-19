@@ -1,46 +1,31 @@
 Breakdown of Work:
-
-March 4th (First Sprint Complete)
 Sol:
-I worked on the following tasks:
 
-1. <Set up group> - Set git collaborate repository, group discord chaneel.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+March 4th (First Sprint)
 
-I also needed to research on Youtube and Google the following things:
+1. <Set up group> - Set git collaborate repository, group discord, trello.
 
-1. <Insert Video or Link to thing you needed to research>
+March 5th
 
-Kyle:
-I worked on the following tasks:
+1. <Update trello> - Set first sprint detail on trello
+2. <Watching Youtube> - Express Session & Auth, Express Passport.js(4hrs)
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+March 6th
 
-I also needed to research on Youtube and Google the following things:
+1. <Review Passport lab> - review the passport constructor
 
-1. <Insert Video or Link to thing you needed to research>
+March 8th
 
-Christy:
-I worked on the following tasks:
+1. <authentication> - register, logout, login(passport) (5hrs)
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+March 12th
 
-I also needed to research on Youtube and Google the following things:
+1. <authentication> - fix authentication error (3hrs)
 
-1. <Insert Video or Link to thing you needed to research>
+March 14th
 
-Evann:
-I worked on the following tasks:
+1. <authentication> - Redis and error log (1hrs)
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+<!-- I also needed to research on Youtube and Google the following things:
 
-I also needed to research on Youtube and Google the following things:
-
-1. <Insert Video or Link to thing you needed to research>
+1. <Insert Video or Link to thing you needed to research> -->

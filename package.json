@@ -1,7 +1,7 @@
 {
   "name": "tsproject",
   "version": "1.0.0",
-  "description": "",
+  "description": "Breakdown of Work: Sol:",
   "main": "index.js",
   "scripts": {
     "start:server": "nodemon ./dist/server.js",
@@ -15,11 +15,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.10.2",
+    "@prisma/client": "^5.11.0",
     "@types/connect-livereload": "^0.6.3",
     "@types/livereload": "^0.9.5",
     "axios": "^1.6.7",
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.1.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.14.1",
     "connect-livereload": "^0.6.1",
