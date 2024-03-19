@@ -28,7 +28,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.18.0",
-    "ioredis": "^4.23.0",
+    "ioredis": "^4.28.5",
     "jsxte": "^3.3.0",
     "livereload": "^0.9.3",
     "morgan": "^1.10.0",

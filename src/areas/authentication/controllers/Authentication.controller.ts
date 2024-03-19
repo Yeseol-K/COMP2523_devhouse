@@ -34,8 +34,8 @@ class AuthenticationController implements IController {
     const { email, password } = req.body;
     try {
       const user = await this._service.getUserByEmailAndPassword(email, password);
-      if (user && bcrypt.compareSync(password, user.password)) { 
-        res.redirect("/");
+      if (user && bcrypt.compareSync(password, user.password)) {
+        res.redirect("/posts");
       } else {
         res.redirect(`${this.path}/login?error=Invalid credentials`);
       }
@@ -46,13 +46,13 @@ class AuthenticationController implements IController {
   };
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const { email, password, username, firstName, lastName } = req.body;
-  
+
     try {
       const existingUser = await this._service.findUserByEmail(email);
       if (existingUser) {
         throw new EmailAlreadyExistsException(email);
       }
-  
+
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = await this._service.createUser({
         email,
@@ -61,11 +61,9 @@ class AuthenticationController implements IController {
         firstName,
         lastName,
       });
-  
 
       res.redirect(`${this.path}/login`);
     } catch (error) {
- 
       next(error);
     }
   };

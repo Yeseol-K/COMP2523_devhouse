@@ -6,7 +6,7 @@ import type { User } from "@prisma/client";
 export class AuthenticationService implements IAuthenticationService {
   readonly _db: DBClient = DBClient.getInstance();
 
-  async findUserByEmail(email: string): Promise<User> {
+  async findUserByEmail(email: string): Promise<User | null> {
     // 🚀 Talk to your real database here (I did this one for you)
     return await this._db.prisma.user.findUnique({
       where: {
