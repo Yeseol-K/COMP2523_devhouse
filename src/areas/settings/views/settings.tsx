@@ -1,12 +1,12 @@
 import Header from "../../../components/shared/Header";
 import { Html } from "../../../templates/html-tmpl";
 
-export default () => {
+export default ({ post, isLoggedIn, username }: { post: any; isLoggedIn: boolean; username: string }) => {
   return (
     <Html>
       <div class="h-screen bg-gray-200 w-screen">
         <main class="flex-1 flex flex-col w-screen items-center">
-          <Header />
+          <Header isLoggedIn={isLoggedIn} username={username} />
           <div class="w-full max-w-lg mt-3">
             <div class="bg-white rounded-lg shadow-lg p-10">
               <h1 class="text-3xl font-bold mb-3">Settings</h1>

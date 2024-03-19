@@ -1,13 +1,21 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import IController from "../../../interfaces/controller.interface";
 import { IAuthenticationService } from "../services";
+import { randomUUID } from "node:crypto";
+import passport from "passport";
+import PassportConfig from "../config/PassportConfig";
 
 class AuthenticationController implements IController {
   public path = "/auth";
   public router = express.Router();
+  private _service: IAuthenticationService;
 
   constructor(service: IAuthenticationService) {
     this.initializeRoutes();
+    this._service = service;
+
+    // const PassportConfig = new PassportConfig("local", service);
+    // this.router.use(PassportConfig.initialize());
   }
 
   private initializeRoutes() {
@@ -18,18 +26,47 @@ class AuthenticationController implements IController {
     this.router.get(`${this.path}/logout`, this.logout);
   }
 
-  private showLoginPage = (_: express.Request, res: express.Response) => {
-    res.render("authentication/views/login");
+  private showLoginPage = (req: express.Request, res: express.Response) => {
+    const errorMessage = req.query.error;
+    res.render("authentication/views/login", { errorMessage });
   };
 
-  private showRegistrationPage = (_: express.Request, res: express.Response) => {
-    res.render("authentication/views/register");
+  private showRegistrationPage = (req: express.Request, res: express.Response) => {
+    const errorMessage = req.query.error;
+    res.render("authentication/views/register", { errorMessage });
   };
 
   // 🔑 These Authentication methods needs to be implemented by you
-  private login = (req: express.Request, res: express.Response) => {};
-  private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
-  private logout = async (req: express.Request, res: express.Response) => {};
+  private login = passport.authenticate("local", {
+    successRedirect: "/posts",
+    failureRedirect: "/auth/login?error=failed%20login",
+    failureMessage: true,
+  });
+
+  private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    const { email, password, username, firstName, lastName } = req.body;
+    // Check if user already exist in db
+    const user = await this._service.findUserByEmail(email);
+    if (user) {
+      res.redirect("/auth/register?error=user%20exists%20already");
+    } else {
+      const createdUser = await this._service.createUser({
+        email,
+        password,
+        username,
+        firstName,
+        lastName,
+      });
+      res.redirect("/auth/login");
+    }
+  };
+
+  private logout = async (req: express.Request, res: express.Response) => {
+    req.logOut((err) => {
+      if (err) console.log(err);
+    });
+    res.redirect("/");
+  };
 }
 
 export default AuthenticationController;

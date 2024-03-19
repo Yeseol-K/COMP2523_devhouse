@@ -16,6 +16,7 @@ export class AuthenticationService implements IAuthenticationService {
   }
   async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
     // 🚀 Talk to your real database here
+    // try catch because return promise
     throw new Error("Method not implemented.");
   }
   async createUser(user: UserDTO): Promise<User> {

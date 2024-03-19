@@ -1,6 +1,6 @@
 import { Html } from "../../../templates/html-tmpl";
 
-export default () => {
+export default ({ errorMessage }: { errorMessage: string }) => {
   return (
     <Html>
       <div class="bg-white font-family-karla h-screen">
@@ -19,7 +19,10 @@ export default () => {
 
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
               <p class="text-center font-bold text-3xl">Welcome!</p>
-              <form class="flex flex-col" method="post" action="/auth/login">
+              <div class="p-4 mb-4 text-sm text-red-800 rounded-lg dark:text-red-400" role="alert">
+                {errorMessage}
+              </div>
+              <form class="flex flex-col" method="post" action="/auth/register">
                 <div class="flex flex-col">
                   <label for="email" class="text-lg">
                     Email
@@ -48,6 +51,47 @@ export default () => {
                   />
                 </div>
 
+                <div class="flex flex-col pt-4">
+                  <label for="username" class="text-lg">
+                    username
+                  </label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="username"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+
+                <div class="flex flex-col pt-4">
+                  <label for="firstName" class="text-lg">
+                    firstName
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="firstName"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+
+                <div class="flex flex-col pt-4">
+                  <label for="lastName" class="text-lg">
+                    lastName
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="lastName"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
                 <input
                   type="submit"
                   value="Register"

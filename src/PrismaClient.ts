@@ -8,7 +8,7 @@ class DBClient {
     this.prisma = new PrismaClient();
   }
 
-  // Use singleton to avoid creating unnecesary connections
+  // Use singleton to avoid creating unnecessary connections
   public static getInstance = () => {
     if (!DBClient.instance) {
       DBClient.instance = new DBClient();
