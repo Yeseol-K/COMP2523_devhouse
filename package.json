@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.11.0",
     "@types/connect-livereload": "^0.6.3",
     "@types/livereload": "^0.9.5",
     "axios": "^1.6.7",
@@ -28,7 +27,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "ioredis": "^4.23.0",
+    "ioredis": "^4.28.5",
     "jsxte": "^3.3.0",
     "livereload": "^0.9.3",
     "morgan": "^1.10.0",
@@ -39,6 +38,7 @@
     "redis": "^3.0.2"
   },
   "devDependencies": {
+    "@prisma/client": "^5.11.0",
     "@types/express": "^4.17.9",
     "@types/express-session": "^1.17.3",
     "@types/node": "^14.18.63",
