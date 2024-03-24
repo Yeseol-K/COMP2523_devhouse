@@ -36,14 +36,15 @@ export default class PassportConfig {
       },
       async (email: string, password: string, done: any) => {
         if (FormValidater.IsEmpty(email) || FormValidater.IsEmpty(password)) {
-          // show some error
+          return;
+        }
+        const user = await this._authenticationService.getUserByEmailAndPassword(email, password);
+        if (user) {
+          console.log("done")
+          done(null, user);
         } else {
-          const user = await this._authenticationService.getUserByEmailAndPassword(email, password);
-          if (user) {
-            done(null, user);
-          } else {
-            done(null, false, { error: "problem with login info " });
-          }
+          console.log("nope")
+          done(null, false, { error: "problem with login info " });
         }
       }
     );
@@ -66,8 +67,6 @@ export default class PassportConfig {
   }
 
   private deserializeUser(passport: any) {
-    //  const that = this; worse case scenario
-    // maybe look into .bind (might be useful)
     passport.deserializeUser(
       async function (id: Express.User, done: (err: null | object, user?: Express.User | false | null) => void) {
         let user = await this._authenticationService.getUserById(id);

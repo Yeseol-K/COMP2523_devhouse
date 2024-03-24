@@ -4,6 +4,7 @@ import { IAuthenticationService } from "../services";
 import { randomUUID } from "node:crypto";
 import passport from "passport";
 import PassportConfig from "../config/PassportConfig";
+import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
 
 class AuthenticationController implements IController {
   public path = "/auth";
@@ -14,8 +15,8 @@ class AuthenticationController implements IController {
     this.initializeRoutes();
     this._service = service;
 
-    // const PassportConfig = new PassportConfig("local", service);
-    // this.router.use(PassportConfig.initialize());
+    const _PassportConfig = new PassportConfig("local", service);
+    this.router.use(_PassportConfig.registerStrategy);
   }
 
   private initializeRoutes() {
@@ -39,9 +40,9 @@ class AuthenticationController implements IController {
   // 🔑 These Authentication methods needs to be implemented by you
   private login = passport.authenticate("local", {
     successRedirect: "/posts",
-    failureRedirect: "/auth/login?error=failed%20login",
-    failureMessage: true,
-  });
+    failureRedirect: "/auth/login", 
+    failureMessage: true
+  })
 
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const { email, password, username, firstName, lastName } = req.body;
