@@ -18,10 +18,8 @@ export default ({ errorMessage }: { errorMessage: string }) => {
             </div>
 
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-              <p class="text-center font-bold text-3xl">Welcome!</p>
-              <div class="p-4 mb-4 text-sm text-red-800 rounded-lg dark:text-red-400" role="alert">
-                {errorMessage}
-              </div>
+              <p class="text-center font-bold text-3xl">Welcomes!</p>
+              <div class="text-red-800 text-center">{errorMessage}</div>
               <form class="flex flex-col" method="post" action="/auth/register">
                 <div class="flex flex-col">
                   <label for="email" class="text-lg">
