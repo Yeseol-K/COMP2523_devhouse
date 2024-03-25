@@ -1,31 +1,6 @@
-Breakdown of Work:
-Sol:
+Kyle:
+I worked on the following tasks:
 
-March 4th (First Sprint)
-
-1. <Set up group> - Set git collaborate repository, group discord, trello.
-
-March 5th
-
-1. <Update trello> - Set first sprint detail on trello
-2. <Watching Youtube> - Express Session & Auth, Express Passport.js(4hrs)
-
-March 6th
-
-1. <Review Passport lab> - review the passport constructor
-
-March 8th
-
-1. <authentication> - register, logout, login(passport) (5hrs)
-
-March 12th
-
-1. <authentication> - fix authentication error (3hrs)
-
-March 14th
-
-1. <authentication> - Redis and error log (1hrs)
-
-<!-- I also needed to research on Youtube and Google the following things:
-
-1. <Insert Video or Link to thing you needed to research> -->
+1. 2.5 hours on March 11th, reading over starter code and implementing passportConfig and authController
+2. 1 Hour on March 17th, finishing passportConfig (serialize, deserialize, register)
+3. 2 Hours March 24th, setting up prisma methods, trying to figure out redis

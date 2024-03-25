@@ -5,6 +5,7 @@ import { randomUUID } from "node:crypto";
 import passport from "passport";
 import PassportConfig from "../config/PassportConfig";
 import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
+import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
 
 class AuthenticationController implements IController {
   public path = "/auth";
@@ -29,11 +30,17 @@ class AuthenticationController implements IController {
 
   private showLoginPage = (req: express.Request, res: express.Response) => {
     const errorMessage = req.query.error;
+    if (errorMessage) {
+      //new EmailAlreadyExistsException(email)
+    }
     res.render("authentication/views/login", { errorMessage });
   };
 
   private showRegistrationPage = (req: express.Request, res: express.Response) => {
-    const errorMessage = req.query.error;
+    let errorMessage = req.query.error;
+    if (errorMessage) {
+      errorMessage = `User with email ${errorMessage} already exists`
+    }
     res.render("authentication/views/register", { errorMessage });
   };
 
@@ -49,7 +56,7 @@ class AuthenticationController implements IController {
     // Check if user already exist in db
     const user = await this._service.findUserByEmail(email);
     if (user) {
-      res.redirect("/auth/register?error=user%20exists%20already");
+      res.redirect(`/auth/register?error=${email}`);
     } else {
       const createdUser = await this._service.createUser({
         email,
