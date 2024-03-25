@@ -47,6 +47,7 @@ class AuthenticationController implements IController {
     const { email, password, username, firstName, lastName } = req.body;
     // Check if user already exist in db
     const user = await this._service.findUserByEmail(email);
+    // console.log(user);
     if (user) {
       res.redirect("/auth/register?error=user%20exists%20already");
     } else {

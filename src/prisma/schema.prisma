@@ -15,3 +15,12 @@ model User {
   firstName String
   lastName  String
 }
+
+model Post {
+  postId    String @id @default(cuid())
+  message   String
+  userId    String
+  // createdAt Date
+  // likes     Number
+  // comments  Number
+}

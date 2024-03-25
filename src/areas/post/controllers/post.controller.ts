@@ -2,6 +2,7 @@ import { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { post, posts } from "../../../model/fakeDB";
+import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 
 class PostController implements IController {
   public path = "/posts";

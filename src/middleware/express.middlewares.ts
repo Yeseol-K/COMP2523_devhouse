@@ -23,7 +23,7 @@ module.exports = (app) => {
   app.use(
     session({
       secret: "secret",
-      // store: redis,
+      //store: redis,
       resave: false,
       saveUninitialized: false,
       cookie: {
