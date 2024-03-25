@@ -7,10 +7,10 @@ import { expressExtend } from "jsxte";
 import Redis from "ioredis";
 
 const redis = new Redis({
-  port: 16515,
-  host: "redis-16515.c321.us-east-1-2.ec2.cloud.redislabs.com",
-  username: "default",
-  password: "gaTR1BvzHt6kcIbq73b7YhwPDT6WJKh1",
+  port: process.env.REDIS_PORT,
+  host: process.env.REDIS_HOST,
+  username: "default", 
+  password: process.env.REDIS_PASSWORD,
 });
 
 module.exports = (app) => {
