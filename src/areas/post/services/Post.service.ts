@@ -1,15 +1,19 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
+import DBClient from "../../../PrismaClient";
+import type { User } from "@prisma/client";
+
 
 // ❗️ Implement this class much later, once everything works fine with your mock db
 export class PostService implements IPostService {
+  readonly _db: DBClient = DBClient.getInstance();
+
   addPost(post: IPost, username: string): void {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    
   }
   getAllPosts(username: string): IPost[] {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    //this._db.prisma
+    throw new Error("Where is my posts table?")
   }
   findById(id: string): IPost {
     // 🚀 Implement this yourself.

@@ -2,10 +2,13 @@ import { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { post, posts } from "../../../model/fakeDB";
+import DBClient from "../../../PrismaClient";
+import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 
 class PostController implements IController {
   public path = "/posts";
   public router = Router();
+  readonly _db: DBClient = DBClient.getInstance();
 
   constructor(postService: IPostService) {
     this.initializeRoutes();
@@ -23,7 +26,7 @@ class PostController implements IController {
   private getAllPosts = (req: Request, res: Response) => {
     const isLoggedIn = req.isAuthenticated();
     const username = req.user.username;
-    console.log(username);
+    //const posts = this._db.prisma.
     res.render("post/views/posts", { posts: posts, isLoggedIn, username });
   };
 

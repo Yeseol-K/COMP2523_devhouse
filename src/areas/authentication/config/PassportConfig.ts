@@ -1,10 +1,3 @@
-//----------------------------------------
-// TODO:                                 |
-//----------------------------------------
-// Configure Passport.js Local Authentication in this file
-// I have written some code to help you get started, and you need to
-// finish it off 🚀 Make sure to replace the "any" type.
-
 import IUser from "../../../interfaces/user.interface";
 import passport from "passport";
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
