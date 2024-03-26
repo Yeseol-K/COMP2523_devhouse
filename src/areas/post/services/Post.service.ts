@@ -8,23 +8,41 @@ import type { User } from "@prisma/client";
 export class PostService implements IPostService {
   readonly _db: DBClient = DBClient.getInstance();
 
-  addPost(post: IPost, username: string): void {
-    
+  async addPost(post: IPost, username: string): Promise<void> {
+    await this._db.prisma.post.create({
+      data: {
+        id: post.id,
+        message: post.message,
+        userId: post.userId
+      }
+    })
   }
-  getAllPosts(username: string): IPost[] {
-    //this._db.prisma
-    throw new Error("Where is my posts table?")
+  async getAllPosts(username: string): Promise<IPost[]> {
+    const user = await this._db.prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+    })
+    //@ts-ignore
+    return await this._db.prisma.post.findMany({
+      where: {
+        userId: user.id
+      }
+    })
   }
-  findById(id: string): IPost {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+  async findById(id: string): Promise<IPost | undefined> {
+    return await this._db.prisma.post.findUnique({
+      where: {
+        id: id
+      }
+    })
   }
   addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
 
-  sortPosts(posts: IPost[]): IPost[] {
+  sortPosts(posts: IPost[]): Promise<IPost[]> {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }

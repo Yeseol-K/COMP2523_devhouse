@@ -23,12 +23,12 @@ export class PostViewModel {
   public commentList?: Array<IComment>;
 
   constructor(post: IPost) {
-    this.postId = post.postId;
+    this.postId = post.id;
     this.userId = post.userId;
-    this.createdAt = post.createdAt;
+    //this.createdAt = post.createdAt;
     this.message = post.message;
-    this.comments = post.comments?.toString();
-    this.likes = post.likes?.toString();
-    this.commentList = post.commentList;
+    // this.comments = post.comments?.toString();
+    // this.likes = post.likes?.toString();
+    // this.commentList = post.commentList;
   }
 }

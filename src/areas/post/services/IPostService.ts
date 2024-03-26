@@ -4,11 +4,11 @@ import IPost from "../../../interfaces/post.interface";
 export default interface IPostService {
   addPost(post: IPost, username: string): void;
 
-  sortPosts(posts: IPost[]): IPost[];
+  sortPosts(posts: IPost[]): Promise<IPost[]>;
 
-  getAllPosts(username: string): IPost[];
+  getAllPosts(username: string): Promise<IPost[]>;
 
-  findById(id: string): IPost | undefined;
+  findById(id: string): Promise<IPost> | undefined;
 
   addCommentToPost(
     message: { id: string; createdAt: string; userId: string; message: string },

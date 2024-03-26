@@ -4,14 +4,18 @@ import IPostService from "../services/IPostService";
 import { post, posts } from "../../../model/fakeDB";
 import DBClient from "../../../PrismaClient";
 import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
+import IUser from "../../../interfaces/user.interface";
 
 class PostController implements IController {
   public path = "/posts";
   public router = Router();
   readonly _db: DBClient = DBClient.getInstance();
+  private _service: IPostService;
+
 
   constructor(postService: IPostService) {
     this.initializeRoutes();
+    this._service = postService;
   }
 
   private initializeRoutes() {
@@ -23,11 +27,12 @@ class PostController implements IController {
   }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
-  private getAllPosts = (req: Request, res: Response) => {
+  private getAllPosts = async (req: Request, res: Response) => {
     const isLoggedIn = req.isAuthenticated();
-    const username = req.user.username;
-    //const posts = this._db.prisma.
-    res.render("post/views/posts", { posts: posts, isLoggedIn, username });
+    const user: IUser = req.user;
+    const username = user.username;
+    const posts = await this._service.getAllPosts(username)
+    res.render("post/views/posts", { post: posts, isLoggedIn, username, user });
   };
 
   // 🚀 This methods should use your postService and pull from your actual fakeDB, not the temporary post object

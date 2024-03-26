@@ -1,6 +1,7 @@
 import { Html } from "../../../templates/html-tmpl.js";
+import IPost from "../../../interfaces/post.interface.js";
 
-export default ({ post }: { post: any }) => {
+export default ({ post }: { post: IPost }) => {
   return (
     <Html>
       <div class="main-container">
@@ -23,22 +24,22 @@ export default ({ post }: { post: any }) => {
                         />
                         <div class="flex flex-col ml-4">
                           <a class="font-bold text-black" href="#">
-                            {post.userId}
+                            {post.id}
                           </a>
                           <span class="text-grey">{post.userId}</span>
                         </div>
                       </div>
                       <div class="mt-3 mb-1 leading-normal text-lg">{post.message}</div>
-                      <div class="text-grey mb-3 text-sm">{post.createdAt}</div>
+                      {/* <div class="text-grey mb-3 text-sm">{post.createdAt}</div> */}
                       <div class="flex text-grey">
                         <div class="flex items-center mr-4">
                           svg was here
-                          <span>{post.comments} </span>
+                          {/* <span>{post.comments} </span> */}
                         </div>
                         <div class="flex items-center mr-4">svg was here</div>
                         <div class="flex items-center">
                           svg was here
-                          <span>{post.likes}</span>
+                          {/* <span>{post.likes}</span> */}
                         </div>
                       </div>
                     </div>
@@ -79,7 +80,7 @@ export default ({ post }: { post: any }) => {
 
               <div class="border h-full w-full lg:flex-1 px-3 min-h-0 min-w-0">
                 <div class="bg-gray-100 w-full h-full min-h-0 min-w-0 overflow-auto rounded-lg">
-                  {post.commentList.map((comment) => (
+                  {/* {post.commentList.map((comment) => ( */}
                     <div class="w-full h-34 mt-3">
                       <div class="flex items-center dark:bg-gray-800">
                         <div class="text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
@@ -89,15 +90,15 @@ export default ({ post }: { post: any }) => {
                           />
                           <div>
                             <div class="rounded-3xl bg-white px-4 pt-2 pb-2.5">
-                              <div class="font-semibold text-sm leading-relaxed">{comment.userId} </div>
-                              <div class="text-normal leading-snug md:leading-normal"> {comment.message}</div>
+                              {/* <div class="font-semibold text-sm leading-relaxed">{comment.userId} </div> */}
+                              {/* <div class="text-normal leading-snug md:leading-normal"> {comment.message}</div> */}
                               <div class="text-normal leading-snug md:leading-normal"> Reply</div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
+                  {/* ))} */}                  
                 </div>
               </div>
             </section>

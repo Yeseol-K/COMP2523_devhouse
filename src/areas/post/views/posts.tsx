@@ -1,10 +1,12 @@
-import { posts, userDatabase } from "../../../model/fakeDB";
+import { PostViewModel } from "./post.viewmodel";
 import PostForm from "../../../components/PostForm";
 import Header from "../../../components/shared/Header";
 import { Html } from "../../../templates/html-tmpl";
 import Feed from "../../../components/Feed";
+import IPost from "../../../interfaces/post.interface";
+import IUser from "../../../interfaces/user.interface";
 
-export default ({ post, isLoggedIn, username }: { post: any; isLoggedIn: boolean; username: string }) => {
+export default ({ post, isLoggedIn, username, user }: { post: IPost[]; isLoggedIn: boolean; username: string, user: IUser }) => {
   return (
     <Html>
       <div class="h-screen bg-gray-200 w-screen">
@@ -12,7 +14,7 @@ export default ({ post, isLoggedIn, username }: { post: any; isLoggedIn: boolean
           <Header isLoggedIn={isLoggedIn} username={username} />
           <div class="w-full">
             <PostForm />
-            <Feed posts={posts} user={userDatabase[0]} />
+            <Feed posts={post} user={user} />
           </div>
         </main>
       </div>

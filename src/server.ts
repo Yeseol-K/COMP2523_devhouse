@@ -13,7 +13,7 @@ const db = new PrismaClient();
 
 const server = new App([
   new LandingController(),
-  new PostController(new MockPostService()),
+  new PostController(new PostService()),
   // new PostController(new PostService()),
   new AuthenticationController(new AuthenticationService()),
   // new SettingController(new SettingService()),

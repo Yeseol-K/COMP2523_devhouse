@@ -13,7 +13,7 @@ const client_1 = require("@prisma/client");
 const db = new client_1.PrismaClient();
 const server = new app_1.default([
     new Landing_controller_1.default(),
-    new post_controller_1.default(new services_1.MockPostService()),
+    new post_controller_1.default(new services_1.PostService()),
     // new PostController(new PostService()),
     new Authentication_controller_1.default(new services_2.AuthenticationService()),
     // new SettingController(new SettingService()),

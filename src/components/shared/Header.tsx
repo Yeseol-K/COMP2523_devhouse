@@ -2,10 +2,10 @@ export const Header = ({ isLoggedIn, username }: { isLoggedIn: boolean; username
   return (
     <header class="border-b-[1px] border-slate-200 dark:border-neutral-800 w-full p-5 bg-white">
       <div class="flex flex-row items-center gap-2 justify-between">
-        <h1 class="dark:text-white text-xl font-semibold">
+        <h1 class="text-xl font-semibold">
           <a href="/">👩‍💻 DevHouse</a>
         </h1>
-        <h1 class="dark:text-white text-xl font-semibold">
+        <h1 class="text-xl font-semibold">
           {isLoggedIn ? (
             <a href="/settings">
               "{username}" <a href="/auth/logout">Logout 🔑</a>{" "}
