@@ -2,11 +2,15 @@
 
 ## Sol:
 
-* March 4th (First Sprint) : - Set git collaborate repository, group discord, trello.
-* March 5th : - Set first sprint detail on trello, - Express Session & Auth, Express Passport.js(4hrs)
-* March 6th : - review the passport constructor March 8th : - register, logout, login(passport) (5hrs)
-* March 12th : - fix authentication error (3hrs)
-* March 14th : - Redis and error log (1hrs)
+Mar 4th (First Sprint) : - Set git collaborate repository, group discord, trello.
+Mar 5th : - Set first sprint detail on trello, - Express Session & Auth, Express Passport.js(4hrs)
+Mar 6th : - review the passport constructor
+Mar 8th : - register, logout, login(passport) (5hrs)
+Mar 12th : - fix authentication error (3hrs)
+Mar 14th : - Redis and error log (1hrs)
+Mar 19th : - fix error log tsx
+Mar 25th : - connect with Prisma (2hrs)
+Mar 26th : - view the posts (full class + 2hrs)
 
 ## Christy:
 
