@@ -2,11 +2,11 @@
 
 ## Sol:
 
-March 4th (First Sprint) : - Set git collaborate repository, group discord, trello.
-March 5th : - Set first sprint detail on trello, - Express Session & Auth, Express Passport.js(4hrs)
-March 6th : - review the passport constructor March 8th : - register, logout, login(passport) (5hrs)
-March 12th : - fix authentication error (3hrs)
-March 14th : - Redis and error log (1hrs)
+* March 4th (First Sprint) : - Set git collaborate repository, group discord, trello.
+* March 5th : - Set first sprint detail on trello, - Express Session & Auth, Express Passport.js(4hrs)
+* March 6th : - review the passport constructor March 8th : - register, logout, login(passport) (5hrs)
+* March 12th : - fix authentication error (3hrs)
+* March 14th : - Redis and error log (1hrs)
 
 ## Christy:
 
@@ -23,11 +23,11 @@ https://expressjs.com/en/guide/error-handling.html Looked at error handling http
 
 I worked on the following tasks:
 
-2.5 hours on March 11th, reading over starter code and implementing passportConfig and authController
-1 Hour on March 17th, finishing passportConfig (serialize, deserialize, register)
+* 2.5 hours on March 11th, reading over starter code and implementing passportConfig and authController
+* 1 Hour on March 17th, finishing passportConfig (serialize, deserialize, register)
 
 ## Evann:
 
 I worked on the following tasks:
 
-worked on reading/understanding code, create/edit logic for login, finish config for passport and authentication
+* worked on reading/understanding code, create/edit logic for login, finish config for passport and authentication
