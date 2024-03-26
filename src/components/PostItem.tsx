@@ -29,7 +29,7 @@ export const PostItem = ({ post, user }: Props) => {
               class={`flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500`}
             >
               Like
-              {/* <p>{post.likes || 0}</p> */}
+              <p>{post.likes || 0}</p>
             </div>
 
             <div

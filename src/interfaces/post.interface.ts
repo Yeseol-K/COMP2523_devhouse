@@ -4,10 +4,10 @@ interface IPost {
   id: string;
   message: string;
   userId: string;
-  // createdAt: Date;
-  // commentList?: Array<IComment>;
-  // likes: number;
-  // comments: number;
+  createdAt: string;
+  commentList?: Array<IComment>;
+  likes: number;
+  comment: number;
 }
 
 export default IPost;

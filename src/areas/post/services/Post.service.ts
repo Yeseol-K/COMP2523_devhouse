@@ -23,7 +23,6 @@ export class PostService implements IPostService {
         username: username,
       },
     })
-    //@ts-ignore
     return await this._db.prisma.post.findMany({
       where: {
         userId: user.id
@@ -34,6 +33,9 @@ export class PostService implements IPostService {
     return await this._db.prisma.post.findUnique({
       where: {
         id: id
+      },
+      include: {
+        commentList: true
       }
     })
   }

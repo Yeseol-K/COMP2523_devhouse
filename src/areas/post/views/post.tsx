@@ -30,16 +30,16 @@ export default ({ post }: { post: IPost }) => {
                         </div>
                       </div>
                       <div class="mt-3 mb-1 leading-normal text-lg">{post.message}</div>
-                      {/* <div class="text-grey mb-3 text-sm">{post.createdAt}</div> */}
+                      <div class="text-grey mb-3 text-sm">{post.createdAt}</div>
                       <div class="flex text-grey">
                         <div class="flex items-center mr-4">
                           svg was here
-                          {/* <span>{post.comments} </span> */}
+                          <span>{post.comment} </span>
                         </div>
                         <div class="flex items-center mr-4">svg was here</div>
                         <div class="flex items-center">
                           svg was here
-                          {/* <span>{post.likes}</span> */}
+                          <span>{post.likes}</span>
                         </div>
                       </div>
                     </div>
@@ -80,26 +80,26 @@ export default ({ post }: { post: IPost }) => {
 
               <div class="border h-full w-full lg:flex-1 px-3 min-h-0 min-w-0">
                 <div class="bg-gray-100 w-full h-full min-h-0 min-w-0 overflow-auto rounded-lg">
-                  {/* {post.commentList.map((comment) => ( */}
+                  {post.commentList.map((comment) => (
                     <div class="w-full h-34 mt-3">
                       <div class="flex items-center dark:bg-gray-800">
-                        <div class="text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                        <div class="text-black p-4 antialiased flex max-w-lg">
                           <img
                             class="rounded-full h-8 w-8 mr-2 mt-1 "
                             src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80"
                           />
                           <div>
                             <div class="rounded-3xl bg-white px-4 pt-2 pb-2.5">
-                              {/* <div class="font-semibold text-sm leading-relaxed">{comment.userId} </div> */}
-                              {/* <div class="text-normal leading-snug md:leading-normal"> {comment.message}</div> */}
+                              <div class="font-semibold text-sm leading-relaxed">{comment.userId} </div>
+                              <div class="text-normal leading-snug md:leading-normal"> {comment.message}</div>
                               <div class="text-normal leading-snug md:leading-normal"> Reply</div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  {/* ))} */}                  
-                </div>
+                  ))}                 
+                </div> 
               </div>
             </section>
           </main>
