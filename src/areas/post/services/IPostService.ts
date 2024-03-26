@@ -1,3 +1,4 @@
+import IComment from "../../../interfaces/comment.interface";
 import IPost from "../../../interfaces/post.interface";
 
 // ⭐️ Feel free to change this interface in any way you like. It is simply an example...
@@ -11,7 +12,6 @@ export default interface IPostService {
   findById(id: string): Promise<IPost> | undefined;
 
   addCommentToPost(
-    message: { id: string; createdAt: string; userId: string; message: string },
-    postId: string
-  ): IPost | void;
+    message: IComment,
+  ): Promise<IPost | void>;
 }

@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
-import { post, posts } from "../../../model/fakeDB";
 import DBClient from "../../../PrismaClient";
 import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import IUser from "../../../interfaces/user.interface";
@@ -41,7 +40,6 @@ class PostController implements IController {
     const isLoggedIn = req.isAuthenticated();
     const id: string = req.params.id;
     const post = await this._service.findById(id)
-    console.log(post)
     res.render("post/views/post", { post: post });
   };
 

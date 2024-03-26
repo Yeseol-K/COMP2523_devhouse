@@ -1,7 +1,8 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import DBClient from "../../../PrismaClient";
-import type { User } from "@prisma/client";
+import type { User, Comment } from "@prisma/client";
+import IComment from "../../../interfaces/comment.interface";
 
 
 // ❗️ Implement this class much later, once everything works fine with your mock db
@@ -39,13 +40,18 @@ export class PostService implements IPostService {
       }
     })
   }
-  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+  async addCommentToPost(message: IComment): Promise<void> {
+    // await this._db.prisma.comment.create({
+    //   data: {
+    //     id: message.id,
+    //     createdAt: message.createdAt,
+    //     userId: message.userId,
+    //     postId: message.postId
+    //   }
+    // })
   }
 
   sortPosts(posts: IPost[]): Promise<IPost[]> {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    throw new Error("Sorting not implemented yet")
   }
 }
