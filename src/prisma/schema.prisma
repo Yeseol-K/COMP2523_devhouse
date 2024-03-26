@@ -2,25 +2,44 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// npx prisma db push
+// npx prisma generate (if issues)
+// npx prisma studio
+
 datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
 }
 
 model User {
-  id        String @id @default(cuid())
-  username  String @unique
-  email     String @unique
-  password  String
-  firstName String
-  lastName  String
+  id             String    @id
+  username       String    @unique
+  email          String    @unique
+  password       String
+  firstName      String
+  lastName       String
+  profilePicture String    @default("https://www.shutterstock.com/shutterstock/photos/1760295569/display_1500/stock-vector-profile-picture-avatar-icon-vector-1760295569.jpg")
+  posts          Post[]
+  Comment        Comment[]
 }
 
 model Post {
-  postId    String @id @default(cuid())
+  id          String    @id
+  message     String
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  createdAt   String    @default("March 26th, 2024")
+  likes       Int       @default(0)
+  commentList Comment[]
+  comment     Int       @default(0)
+}
+
+model Comment {
+  id        String  @id
   message   String
   userId    String
-  // createdAt Date
-  // likes     Number
-  // comments  Number
+  createdAt String  @default("March 26th, 2024")
+  user      User    @relation(fields: [userId], references: [id])
+  Post      Post?   @relation(fields: [postId], references: [id])
+  postId    String?
 }
