@@ -10,6 +10,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
 import { IAuthenticationService } from "../services/IAuthentication.service";
 import FormValidater from "../../../helper/FormValidator";
+import { User } from "@prisma/client";
 
 declare global {
   namespace Express {
@@ -56,7 +57,7 @@ export default class PassportConfig {
   }
 
   private serializeUser(passport: any) {
-    passport.serializeUser(function (user: IUser, done: (err: null | object, id: string) => void) {
+    passport.serializeUser(function (user: User, done: (err: null | object, id: string) => void) {
       if (user) {
         done(null, user.id);
       } else {

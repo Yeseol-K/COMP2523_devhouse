@@ -44,20 +44,20 @@ class AuthenticationController implements IController {
   });
 
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const { email, password, username, firstName, lastName } = req.body;
-    // Check if user already exist in db
-    const user = await this._service.findUserByEmail(email);
-    // console.log(user);
-    if (user) {
+    const { email, password, username, firstName, lastName, profilePicture } = req.body;
+
+    const createdUser = await this._service.createUser({
+      email,
+      password,
+      username,
+      firstName,
+      lastName,
+      profilePicture,
+    });
+
+    if (!createdUser) {
       res.redirect("/auth/register?error=user%20exists%20already");
     } else {
-      const createdUser = await this._service.createUser({
-        email,
-        password,
-        username,
-        firstName,
-        lastName,
-      });
       res.redirect("/auth/login");
     }
   };

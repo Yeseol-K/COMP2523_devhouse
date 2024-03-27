@@ -9,6 +9,8 @@ Mar 8th : - register, logout, login(passport) (5hrs)
 Mar 12th : - fix authentication error (3hrs)
 Mar 14th : - Redis and error log (1hrs)
 Mar 19th : - fix error log tsx
+Mar 25th : - connect with Prisma (2hrs)
+Mar 26th : - view the posts (full class + Ed class + 2hrs)
 
 ## Christy:
 

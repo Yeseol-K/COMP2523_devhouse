@@ -1,5 +1,6 @@
 import IComment from "../../../interfaces/comment.interface";
 import IPost from "../../../interfaces/post.interface";
+import { Post } from "@prisma/client";
 
 // The following is an (incomplete) example of what a view model may look like
 // The purpose of a view model is to format the incoming data from the database
@@ -14,21 +15,22 @@ import IPost from "../../../interfaces/post.interface";
 // date that you store in createdAt.
 
 export class PostViewModel {
-  public postId: string;
-  public userId: string;
+  // public postId: string;
+  // public userId: string;
   public createdAt: Date;
   public message: string;
-  public comments: string;
+  public comment: string;
   public likes: string;
-  public commentList?: Array<IComment>;
+  public profilePicture?: string;
+  // public commentList?: Array<IComment>;
 
-  constructor(post: IPost) {
-    this.postId = post.postId;
-    this.userId = post.userId;
+  constructor(post: Post) {
+    // this.postId = post.id;
+    // this.userId = post.userId;
     this.createdAt = post.createdAt;
     this.message = post.message;
-    this.comments = post.comments?.toString();
+    this.comment = post.comment?.toString();
     this.likes = post.likes?.toString();
-    this.commentList = post.commentList;
+    // this.commentList = post.commentList;
   }
 }

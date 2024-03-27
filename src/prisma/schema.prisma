@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  id             String    @id
+  id             String     @id @default(uuid())
   username       String    @unique
   email          String    @unique
   password       String
@@ -24,21 +24,21 @@ model User {
 }
 
 model Post {
-  id          String    @id
+  id          String    @id @default(uuid())
   message     String
   userId      String
   user        User      @relation(fields: [userId], references: [id])
-  createdAt   String    @default("March 26th, 2024")
+  createdAt   DateTime 
   likes       Int       @default(0)
+  comment    Int       @default(0)
   commentList Comment[]
-  comment     Int       @default(0)
 }
 
 model Comment {
-  id        String  @id
+  id        String   @id @default(uuid())
   message   String
   userId    String
-  createdAt String  @default("March 26th, 2024")
+  createdAt DateTime
   user      User    @relation(fields: [userId], references: [id])
   Post      Post?   @relation(fields: [postId], references: [id])
   postId    String?

@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+// import { randomUUID } from "crypto";
 import DBClient from "../../../PrismaClient";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService, UserDTO } from "./IAuthentication.service";
@@ -14,9 +14,10 @@ export class AuthenticationService implements IAuthenticationService {
         email: email,
       },
     });
-    console.log(userLogin);
+    // console.log(userLogin);
     return null;
   }
+
   async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
     //const passwordHash = bcrypt.hashSync(password, 10)
     //console.log(passwordHash)
@@ -27,22 +28,30 @@ export class AuthenticationService implements IAuthenticationService {
       },
     });
   }
+
   async createUser(user: UserDTO): Promise<User> {
-    const id = randomUUID();
-    //const passwordHash = bcrypt.hashSync(user.password, 10)
-    return await this._db.prisma.user.create({
-      data: {
-        id: id,
-        password: user.password,
-        username: user.username,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      },
+    const existingUser = await this._db.prisma.user.findUnique({
+      where: { email: user.email },
     });
+
+    if (!existingUser) {
+      return await this._db.prisma.user.create({
+        data: {
+          // id: id,
+          password: user.password,
+          username: user.username,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        },
+      });
+    }
+    return null;
+    // const id = randomUUID();
+    //const passwordHash = bcrypt.hashSync(user.password, 10)
   }
 
-  async getUserById(id: string): Promise<User | null> {
+  async getUserById(id: string): Promise<User> {
     return await this._db.prisma.user.findUnique({
       where: {
         id: id,
