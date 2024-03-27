@@ -18,9 +18,10 @@ model User {
   password       String
   firstName      String
   lastName       String
-  profilePicture String    @default("https://www.shutterstock.com/shutterstock/photos/1760295569/display_1500/stock-vector-profile-picture-avatar-icon-vector-1760295569.jpg")
+  profilePicture String?   @default("https://www.shutterstock.com/shutterstock/photos/1760295569/display_1500/stock-vector-profile-picture-avatar-icon-vector-1760295569.jpg")
   posts          Post[]
   Comment        Comment[]
+  Follow         Follow[]
 }
 
 model Post {
@@ -43,3 +44,10 @@ model Comment {
   Post      Post?   @relation(fields: [postId], references: [id])
   postId    String?
 }
+
+// model Follow {
+//   follower    User   @relation(fields: [followerId], references: [id])
+//   following   User   @relation(fields: [followingId], references: [id])
+//   followerId  String
+//   followingId String
+// }

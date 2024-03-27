@@ -9,7 +9,7 @@ export default ({ post }: { post: IPost }) => {
           <main class="sm:h-full flex-1 flex flex-col min-h-0 min-w-0 overflow-auto">
             <header class="border-b-[1px] border-slate-200 dark:border-neutral-800 w-full p-5 bg-white">
               <div class="flex flex-row items-center gap-2">
-                <h1 class="dark:text-white text-xl font-semibold">DevHouse</h1>
+                <h1 class="text-xl font-semibold">DevHouse</h1>
               </div>
             </header>
             <section class="flex-1 pt-3 md:p-6 lg:mb-0 lg:min-h-0 lg:min-w-0">
@@ -47,19 +47,19 @@ export default ({ post }: { post: IPost }) => {
                   <div class=" w-full min-h-0 min-w-0 mb-4">
                     <div class="flex mx-auto items-center justify-center shadow-lg mt-25 mx-8 mb-4 max-w-lg">
                       <form
-                        action="/posts/<%= post.postId %>/comment"
+                        action={`posts/${post.id}/comment`}
                         method="post"
                         class="w-full max-w-xl bg-white rounded-lg px-4 pt-2"
                       >
                         <div class="flex flex-wrap -mx-3 mb-6">
                           <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
                           <div class="w-full md:w-full px-3 mb-2 mt-2">
-                            <textarea
+                            <input
                               name="commentText"
                               class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
                               placeholder="Type Your Comment"
                               required
-                            ></textarea>
+                            ></input>
                           </div>
                           <div class="w-full md:w-full flex items-start md:w-full px-3">
                             <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto">SVG was here</div>
@@ -67,8 +67,8 @@ export default ({ post }: { post: IPost }) => {
                               <input
                                 type="submit"
                                 class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
-                                value="Post Comment"
-                              />
+                                value="Post Comment">
+                              </input>
                             </div>
                           </div>
                         </div>

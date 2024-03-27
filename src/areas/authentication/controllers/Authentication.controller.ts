@@ -6,6 +6,7 @@ import passport from "passport";
 import PassportConfig from "../config/PassportConfig";
 import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
 import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
+import { User } from "@prisma/client";
 
 class AuthenticationController implements IController {
   public path = "/auth";
@@ -58,13 +59,14 @@ class AuthenticationController implements IController {
     if (user) {
       res.redirect(`/auth/register?error=${email}`);
     } else {
-      const createdUser = await this._service.createUser({
+      const createdUser = this._service.createUser({
         email,
-        password,
         username,
-        firstName,
+        firstName, 
         lastName,
-      });
+        password,
+        profilePicture: ""
+      })
       res.redirect("/auth/login");
     }
   };

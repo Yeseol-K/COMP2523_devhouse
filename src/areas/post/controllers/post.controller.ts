@@ -4,6 +4,8 @@ import IPostService from "../services/IPostService";
 import DBClient from "../../../PrismaClient";
 import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import IUser from "../../../interfaces/user.interface";
+import IPost from "../../../interfaces/post.interface";
+import { randomUUID } from "crypto";
 
 class PostController implements IController {
   public path = "/posts";
@@ -22,7 +24,7 @@ class PostController implements IController {
     this.router.get(`${this.path}/:id`, this.getPostById);
     this.router.get(`${this.path}/:id/delete`, this.deletePost);
     this.router.post(`${this.path}/:id/comment`, this.createComment);
-    this.router.post(`${this.path}`, this.createPost);
+    this.router.post(`${this.path}/new`, this.createPost);
   }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
@@ -44,9 +46,34 @@ class PostController implements IController {
   };
 
   // 🚀 These post methods needs to be implemented by you
-  private createComment = async (req: Request, res: Response, next: NextFunction) => {};
-  private createPost = async (req: Request, res: Response, next: NextFunction) => {};
-  private deletePost = async (req: Request, res: Response, next: NextFunction) => {};
+  private createComment = async (req: Request, res: Response, next: NextFunction) => {
+    console.log("creating comment")
+    const user = req.user
+    const postId = req.params.id
+    const message = req.body.commentText
+    console.log("post body") 
+    console.log(req.body, req.user, req.params.id)
+    this._service.addCommentToPost({id: randomUUID(), message: message, userId: user.id, createdAt: new Date().toDateString(), postId: postId})
+    res.redirect(`/posts/${postId}`)
+  };
+  private createPost = async (req: Request, res: Response, next: NextFunction) => {
+    const message = req.body.message
+    const user = req.user    
+    const post: IPost = {
+      message: message,
+      userId: user.id,
+      createdAt: Date.now().toLocaleString(),
+      likes: 0,
+      comment: 0,
+      id: randomUUID()
+    }
+    this._service.addPost(post, user.username)
+    res.redirect("/posts")
+  };
+  private deletePost = async (req: Request, res: Response, next: NextFunction) => {
+    const postId = req.body.id
+    //! no function to delete in this._service
+  };
 }
 
 export default PostController;

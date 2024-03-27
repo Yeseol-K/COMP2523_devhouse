@@ -14,7 +14,7 @@ export const PostItem = ({ post, user }: Props) => {
 
         <div class="w-full">
           <div class=" flex flex-row items-center gap-20 justify-between">
-            <p class="font-semibold cursor-pointer hover:underline">John Doe</p>
+            <p class="font-semibold cursor-pointer hover:underline">{user.firstName} {user.lastName}</p>
             <span class="text-neutral-500 text-sm">5 days ago</span>
           </div>
 
@@ -22,7 +22,7 @@ export const PostItem = ({ post, user }: Props) => {
 
           <div class="flex flex-row items-center mt-3 gap-10">
             <div class="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-sky-500">
-              Comment
+              <a href={`posts/${post.id}`}>Comment</a>
             </div>
 
             <div

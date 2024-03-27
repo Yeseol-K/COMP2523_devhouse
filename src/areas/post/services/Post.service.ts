@@ -41,14 +41,15 @@ export class PostService implements IPostService {
     })
   }
   async addCommentToPost(message: IComment): Promise<void> {
-    // await this._db.prisma.comment.create({
-    //   data: {
-    //     id: message.id,
-    //     createdAt: message.createdAt,
-    //     userId: message.userId,
-    //     postId: message.postId
-    //   }
-    // })
+    await this._db.prisma.comment.create({
+      data: {
+        id: message.id,
+        message: message.message,
+        createdAt: message.createdAt,
+        userId: message.userId,
+        postId: message.postId
+      }
+    })
   }
 
   sortPosts(posts: IPost[]): Promise<IPost[]> {
