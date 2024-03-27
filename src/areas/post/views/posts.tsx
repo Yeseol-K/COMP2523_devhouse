@@ -21,7 +21,7 @@ export default ({
     <Html>
       <div class="h-screen bg-gray-200 w-screen">
         <main class="flex-1 flex flex-col w-screen">
-          <Header isLoggedIn={isLoggedIn} username={username} />
+          <Header isLoggedIn={isLoggedIn} user={user} />
           <div class="w-full">
             <PostForm />
             <Feed posts={post} user={user} />

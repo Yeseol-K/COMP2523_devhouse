@@ -23,13 +23,21 @@ export class PostService implements IPostService {
       where: {
         username: username,
       },
+      include: {
+        following: true,
+        followers: true,
+      },
     });
+    const followedUserIds = user.following.map((followedUser) => followedUser.id);
+
     return await this._db.prisma.post.findMany({
       where: {
-        userId: user.id,
+        OR: [{ userId: user.id }, { userId: { in: followedUserIds } }],
       },
       include: {
         user: true,
+        // following: true,
+        // followers: true,
       },
     });
   }
