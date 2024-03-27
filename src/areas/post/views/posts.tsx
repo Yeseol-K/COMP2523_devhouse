@@ -3,7 +3,7 @@ import PostForm from "../../../components/PostForm";
 import Header from "../../../components/shared/Header";
 import { Html } from "../../../templates/html-tmpl";
 import Feed from "../../../components/Feed";
-import user, { Post } from "@prisma/client";
+import { User, Post } from "@prisma/client";
 import IUser from "../../../interfaces/user.interface";
 
 export default ({
@@ -15,7 +15,7 @@ export default ({
   post: Post[];
   isLoggedIn: boolean;
   username: string;
-  user: any;
+  user: User;
 }) => {
   return (
     <Html>
