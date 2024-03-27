@@ -10,7 +10,7 @@
 * Mar 14th : - Redis and error log (1hrs)
 * Mar 19th : - fix error log tsx
 * Mar 25th : - connect with Prisma (2hrs)
-* Mar 26th : - view the posts (full class + 2hrs)
+* Mar 26th : - view the posts, date and followers (full class + Ed class + 6hrs)
 
 ## Christy:
 
