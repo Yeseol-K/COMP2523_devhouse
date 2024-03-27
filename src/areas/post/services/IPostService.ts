@@ -1,5 +1,5 @@
 import IPost from "../../../interfaces/post.interface";
-import { Post } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 
 // ⭐️ Feel free to change this interface in any way you like. It is simply an example...
 export default interface IPostService {
