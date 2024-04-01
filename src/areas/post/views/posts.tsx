@@ -5,8 +5,9 @@ import { Html } from "../../../templates/html-tmpl";
 import Feed from "../../../components/Feed";
 import IPost from "../../../interfaces/post.interface";
 import IUser from "../../../interfaces/user.interface";
+import {Post, User} from "@prisma/client"
 
-export default ({ post, isLoggedIn, username, user }: { post: IPost[]; isLoggedIn: boolean; username: string, user: IUser }) => {
+export default ({ post, isLoggedIn, username, user }: { post: Post[]; isLoggedIn: boolean; username: string, user: User }) => {
   return (
     <Html>
       <div class="h-screen bg-gray-200 w-screen">

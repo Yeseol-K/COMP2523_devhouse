@@ -19,14 +19,29 @@ export class PostService implements IPostService {
     })
   }
   async getAllPosts(username: string): Promise<IPost[]> {
-    const user = await this._db.prisma.user.findUnique({
+    const user: User = await this._db.prisma.user.findUnique({
       where: {
         username: username,
       },
+      include: {
+        following: true
+      }
     })
+    //@ts-ignore
+    let following = user.following.map((u) => u.id)
     return await this._db.prisma.post.findMany({
       where: {
-        userId: user.id
+        OR: [
+          {
+            userId: user.id
+          },
+          {
+            userId: { in: following }
+          }
+        ],
+      },
+      include: {
+        user: true
       }
     })
   }

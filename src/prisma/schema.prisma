@@ -21,7 +21,8 @@ model User {
   profilePicture String?   @default("https://www.shutterstock.com/shutterstock/photos/1760295569/display_1500/stock-vector-profile-picture-avatar-icon-vector-1760295569.jpg")
   posts          Post[]
   Comment        Comment[]
-  Follow         Follow[]
+  following      User[]    @relation("followers")
+  followers      User[]    @relation("followers")
 }
 
 model Post {
@@ -46,8 +47,8 @@ model Comment {
 }
 
 // model Follow {
+//   followId    Int    @id
 //   follower    User   @relation(fields: [followerId], references: [id])
-//   following   User   @relation(fields: [followingId], references: [id])
 //   followerId  String
 //   followingId String
 // }

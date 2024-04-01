@@ -33,7 +33,7 @@ class PostController implements IController {
     const user: IUser = req.user;
     const username = user.username;
     const posts = await this._service.getAllPosts(username)
-    posts.map((p) => console.log(p.commentList))
+    console.log(posts)
     res.render("post/views/posts", { post: posts, isLoggedIn, username, user });
   };
 
