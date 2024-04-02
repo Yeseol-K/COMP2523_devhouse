@@ -6,6 +6,7 @@ import { ensureAuthenticated } from "../../../middleware/authentication.middlewa
 import IUser from "../../../interfaces/user.interface";
 import IPost from "../../../interfaces/post.interface";
 import { randomUUID } from "crypto";
+import type User from "@prisma/client";
 
 class PostController implements IController {
   public path = "/posts";
@@ -33,7 +34,7 @@ class PostController implements IController {
     const user: IUser = req.user;
     const username = user.username;
     const posts = await this._service.getAllPosts(username)
-    console.log(posts)
+    console.log(user)
     res.render("post/views/posts", { post: posts, isLoggedIn, username, user });
   };
 
@@ -42,6 +43,7 @@ class PostController implements IController {
     const isLoggedIn = req.isAuthenticated();
     const id: string = req.params.id;
     const post = await this._service.findById(id)
+    console.log(post)
     res.render("post/views/post", { post: post });
   };
 

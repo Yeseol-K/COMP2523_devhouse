@@ -14,7 +14,7 @@ export default ({ post, isLoggedIn, username, user }: { post: Post[]; isLoggedIn
         <main class="flex-1 flex flex-col w-screen">
           <Header isLoggedIn={isLoggedIn} username={username} />
           <div class="w-full">
-            <PostForm />
+            <PostForm user={user}/>
             <Feed posts={post} user={user} />
           </div>
         </main>

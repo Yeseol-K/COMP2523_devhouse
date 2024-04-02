@@ -1,10 +1,12 @@
-const PostForm = () => {
+import {User} from "@prisma/client"
+
+const PostForm = ({user}: any) => {
   return (
     <div class="border-b-[1px] border-slate-200 dark:border-neutral-800 px-5 py-2">
       <div class="flex flex-row gap-4">
         <img
           class="w-10 h-10 rounded-full"
-          src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+          src={user.profilePicture}
           alt="Rounded avatar"
         />
           <div class="w-full h-full">

@@ -51,7 +51,8 @@ export class PostService implements IPostService {
         id: id
       },
       include: {
-        commentList: true
+        commentList: true,
+        user: true
       }
     })
   }

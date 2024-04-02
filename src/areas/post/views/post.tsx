@@ -1,7 +1,8 @@
 import { Html } from "../../../templates/html-tmpl.js";
 import IPost from "../../../interfaces/post.interface.js";
+import { Post } from "@prisma/client";
 
-export default ({ post }: { post: IPost }) => {
+export default ({ post }: { post: any }) => {
   return (
     <Html>
       <div class="main-container">
@@ -9,7 +10,9 @@ export default ({ post }: { post: IPost }) => {
           <main class="sm:h-full flex-1 flex flex-col min-h-0 min-w-0 overflow-auto">
             <header class="border-b-[1px] border-slate-200 dark:border-neutral-800 w-full p-5 bg-white">
               <div class="flex flex-row items-center gap-2">
-                <h1 class="text-xl font-semibold">DevHouse</h1>
+                <h1 class="text-xl font-semibold">
+                  <a href="/">DevHouse</a>
+                  </h1>
               </div>
             </header>
             <section class="flex-1 pt-3 md:p-6 lg:mb-0 lg:min-h-0 lg:min-w-0">
@@ -19,7 +22,7 @@ export default ({ post }: { post: IPost }) => {
                     <div class="font-sans rounded border px-6 py-4 max-w-md">
                       <div class="flex items-center">
                         <img
-                          src="https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg"
+                          src={post.user.profilePicture}
                           class="h-12 w-12 rounded-full"
                         />
                         <div class="flex flex-col ml-4">
@@ -33,12 +36,12 @@ export default ({ post }: { post: IPost }) => {
                       <div class="text-grey mb-3 text-sm">{post.createdAt}</div>
                       <div class="flex text-grey">
                         <div class="flex items-center mr-4">
-                          svg was here
+                          
                           <span>{post.comment} </span>
                         </div>
-                        <div class="flex items-center mr-4">svg was here</div>
+                        <div class="flex items-center mr-4"></div>
                         <div class="flex items-center">
-                          svg was here
+                          
                           <span>{post.likes}</span>
                         </div>
                       </div>
@@ -47,7 +50,7 @@ export default ({ post }: { post: IPost }) => {
                   <div class=" w-full min-h-0 min-w-0 mb-4">
                     <div class="flex mx-auto items-center justify-center shadow-lg mt-25 mx-8 mb-4 max-w-lg">
                       <form
-                        action={`posts/${post.id}/comment`}
+                        action={`/posts/${post.id}/comment`}
                         method="post"
                         class="w-full max-w-xl bg-white rounded-lg px-4 pt-2"
                       >
@@ -62,7 +65,7 @@ export default ({ post }: { post: IPost }) => {
                             ></input>
                           </div>
                           <div class="w-full md:w-full flex items-start md:w-full px-3">
-                            <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto">SVG was here</div>
+                            <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto"></div>
                             <div class="-mr-1">
                               <input
                                 type="submit"
@@ -82,7 +85,7 @@ export default ({ post }: { post: IPost }) => {
                 <div class="bg-gray-100 w-full h-full min-h-0 min-w-0 overflow-auto rounded-lg">
                   {post.commentList.map((comment) => (
                     <div class="w-full h-34 mt-3">
-                      <div class="flex items-center dark:bg-gray-800">
+                      <div class="flex items-center">
                         <div class="text-black p-4 antialiased flex max-w-lg">
                           <img
                             class="rounded-full h-8 w-8 mr-2 mt-1 "
