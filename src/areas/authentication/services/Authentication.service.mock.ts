@@ -1,17 +1,21 @@
 import { database } from "../../../model/fakeDB";
 import { IAuthenticationService, UserDTO } from "./IAuthentication.service";
 import { randomUUID } from "node:crypto";
-import type { User } from "@prisma/client";
-import { bcrypt } from "bcrypt";
+// import type { User } from "@prisma/client";
+import bcrypt from "bcrypt"; // Corrected import
+import IUser from "../../../interfaces/user.interface"
 
-// FIXME: Don't forget: you shouldn't have the type "any"!
+// Assumes database and UserDTO are correctly typed
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
 
-  public async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
-    const user = this._db.users.find((user) => email === user.email && password === user.password);
-    // console.log(user);
-    return user;
+  // Correct password handling using bcrypt for comparison
+  public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser | null> {
+    const user = this._db.users.find((user) => email === user.email);
+    if (user && await bcrypt.compare(password, user.password)) {
+      return user;
+    }
+    return null;
   }
 
   public async findUserByEmail(email: string): Promise<User | null> {
@@ -19,9 +23,10 @@ export class MockAuthenticationService implements IAuthenticationService {
     return user;
   }
 
+  // Ensure password hashing is done properly and asynchronously
   public async createUser(user: UserDTO): Promise<User> {
-    const userObj = { ...user, id: randomUUID() };
-    // userObj.password = bcrypt.hash(userObj.password); // USE BCRYPT
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const userObj: User = { ...user, id: randomUUID(), password: hashedPassword };
     this._db.users.push(userObj);
     console.log(this._db.users);
     return userObj;

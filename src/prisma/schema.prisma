@@ -8,10 +8,33 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(cuid())
-  username  String @unique
-  email     String @unique
-  password  String
-  firstName String
-  lastName  String
+  id             String @id @default(cuid())
+  username       String @unique
+  email          String @unique
+  password       String
+  firstName      String
+  lastName       String
+  profilePicture String @default("https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg")
+  role           String
+  posts          Post[]
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  message     String
+  createdAt   DateTime  @default(now())
+  commentList Comment[]
+  likes       Int       @default(0)
+  comments    Int       @default(0)
+}
+
+// Define a Comment model if you don't have one already
+model Comment {
+  id        String   @id @default(cuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  message   String
+  createdAt DateTime @default(now())
 }

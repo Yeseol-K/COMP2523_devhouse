@@ -1,17 +1,16 @@
-import IPost from "../../../interfaces/post.interface";
+import type { Post } from "@prisma/client";
 
-// ⭐️ Feel free to change this interface in any way you like. It is simply an example...
 export default interface IPostService {
-  addPost(post: IPost, username: string): void;
+  addPost(post: Post, username: string): Promise<Post>;
 
-  sortPosts(posts: IPost[]): IPost[];
+  getAllPosts(username: string): Promise<Post[]>; // Return an array of Post
 
-  getAllPosts(username: string): IPost[];
-
-  findById(id: string): IPost | undefined;
+  findById(id: string): Promise<Post | null>; // Find a single Post by ID
 
   addCommentToPost(
-    message: { id: string; createdAt: string; userId: string; message: string },
+    comment: { createdAt: string; userId: string; message: string }, 
     postId: string
-  ): IPost | void;
+  ): Promise<void>; // Return the updated Post or null if not found
+
+  sortPosts(posts: Post[]): Promise<Post[] | null>; // Sort an array of Post
 }
