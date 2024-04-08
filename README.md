@@ -22,7 +22,10 @@ Understand the code and fill in the missing code for strategies.
 https://expressjs.com/en/guide/error-handling.html Looked at error handling https://stackoverflow.com/questions/27794750/node-js-with-express-throw-error-vs-nexterror Looked at error handling https://stackoverflow.com/questions/20244026/using-redisstore-in-nodejs-expressjs Looked at RedisStore redis/node-redis#2660 Looked at RedisStore https://medium.com/swlh/session-management-in-nodejs-using-redis-as-session-store-64186112aa9 
 * March 25 - Worked on implementing post service and figuring out prisma db push model
 * March 26 - Working on chaning all IPost and IUser to prisma Post and User. However, having error on User DTO. Attempting to fix.
+* April 2 - Worked on fixing all user post related issues and Post page show.
+* April 6 - Fixing auth issue after post page.
 
+  
 ## Kyle:
 
 I worked on the following tasks:
