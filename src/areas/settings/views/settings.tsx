@@ -12,7 +12,7 @@ export default ({ post, isLoggedIn, user }: { post: any; isLoggedIn: boolean; us
             <div class="bg-white rounded-lg shadow-lg p-10">
               <h1 class="text-3xl font-bold mb-3">Settings</h1>
 
-              <form action="/setting/change-username" method="post">
+              <form action="/settings/change-username" method="post">
                 <div class="col-span-6 sm:col-span-3">
                   <div class="mb-4">
                     <label for="newUsername" class="block text-sm font-medium text-gray-700 mb-2">
@@ -35,7 +35,7 @@ export default ({ post, isLoggedIn, user }: { post: any; isLoggedIn: boolean; us
                   </div>
                 </div>
               </form>
-              <form action="/setting/change-email" method="post">
+              <form action="/settings/change-email" method="post">
                 <div class="col-span-6 sm:col-span-3">
                   <div class="mb-4">
                     <label for="newEmail" class="block text-sm font-medium text-gray-700 mb-2">
@@ -60,7 +60,7 @@ export default ({ post, isLoggedIn, user }: { post: any; isLoggedIn: boolean; us
                 </div>
               </form>
 
-              <form action="/setting/change-password" method="post">
+              <form action="/settings/change-password" method="post">
                 <div class="mb-4">
                   <label class="block text-sm font-medium text-gray-700 mb-2" for="currentPassword">
                     Current Password:

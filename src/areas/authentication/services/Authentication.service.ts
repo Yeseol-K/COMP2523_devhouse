@@ -21,6 +21,7 @@ export class AuthenticationService implements IAuthenticationService {
   async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
     //const passwordHash = bcrypt.hashSync(password, 10)
     //console.log(passwordHash)
+
     return await this._db.prisma.user.findUnique({
       where: {
         email: email,
@@ -33,6 +34,7 @@ export class AuthenticationService implements IAuthenticationService {
     const existingUser = await this._db.prisma.user.findUnique({
       where: { email: user.email },
     });
+    // const passwordHash = bcrypt.hashSync(user.password, 12);
 
     if (!existingUser) {
       return await this._db.prisma.user.create({
@@ -48,7 +50,6 @@ export class AuthenticationService implements IAuthenticationService {
     }
     return null;
     // const id = randomUUID();
-    //const passwordHash = bcrypt.hashSync(user.password, 10)
   }
 
   async getUserById(id: string): Promise<User> {

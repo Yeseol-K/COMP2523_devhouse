@@ -9,15 +9,17 @@ const Authentication_controller_1 = __importDefault(require("./areas/authenticat
 // import { MockAuthenticationService } from "./areas/authentication/services/Authentication.service.mock";
 const services_1 = require("./areas/post/services");
 const Landing_controller_1 = __importDefault(require("./areas/landing/controllers/Landing.controller"));
-const services_2 = require("./areas/authentication/services");
+const setting_controller_1 = __importDefault(require("./areas/settings/controllers/setting.controller"));
+const services_2 = require("./areas/settings/services");
+const services_3 = require("./areas/authentication/services");
 const client_1 = require("@prisma/client");
 const db = new client_1.PrismaClient();
 const server = new App_1.default([
     new Landing_controller_1.default(),
-    new post_controller_1.default(new services_1.PostService(), new services_2.AuthenticationService()),
+    new post_controller_1.default(new services_1.PostService(), new services_3.AuthenticationService()),
     // new PostController(new PostService()),
-    new Authentication_controller_1.default(new services_2.AuthenticationService()),
-    // new SettingController(new SettingService()),
+    new Authentication_controller_1.default(new services_3.AuthenticationService()),
+    new setting_controller_1.default(new services_2.SettingService()),
 ]);
 server.start();
 //# sourceMappingURL=server.js.map

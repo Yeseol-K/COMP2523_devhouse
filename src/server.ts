@@ -16,7 +16,7 @@ const server = new App([
   new PostController(new PostService(), new AuthenticationService()),
   // new PostController(new PostService()),
   new AuthenticationController(new AuthenticationService()),
-  // new SettingController(new SettingService()),
+  new SettingController(new SettingService()),
 ]);
 
 server.start();

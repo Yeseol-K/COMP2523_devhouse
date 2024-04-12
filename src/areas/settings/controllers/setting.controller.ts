@@ -20,11 +20,43 @@ class SettingController implements IController {
     this.router.post(`${this.path}/change-password`, this.changePassword);
   }
   private getSettingsPage = async (req: Request, res: Response, next: NextFunction) => {
-    res.render("settings/views/settings");
+    const isLoggedIn = req.isAuthenticated();
+    const user = req.user;
+    res.render("settings/views/settings", { isLoggedIn, user });
   };
-  private changeUsername = async (req: Request, res: Response, next: NextFunction) => {};
-  private changeEmail = async (req: Request, res: Response, next: NextFunction) => {};
-  private changePassword = async (req: Request, res: Response, next: NextFunction) => {};
+  private changeUsername = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const newUsername = req.body.newUsername;
+      const userId = req.user.id;
+      this.settingService.changeUsername(userId, newUsername);
+      res.redirect("/settings");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  private changeEmail = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const newEmail = req.body.newEmail;
+      const userId = req.user.id;
+      this.settingService.changeEmail(userId, newEmail);
+      res.redirect("/settings");
+    } catch (err) {
+      next(err);
+    }
+  };
+  private changePassword = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id;
+    console.log(req.body);
+    const currentPassword = req.body.currentPassword;
+    const newPassword = req.body.newPassword;
+    const confirmPassword = req.body.confirmNewPassword;
+    if (newPassword === confirmPassword) {
+      this.settingService.changePassword(userId, currentPassword, newPassword);
+      res.redirect("/settings");
+    } else {
+      throw new Error("The new password and confirm password does not match.");
+    }
+  };
 }
 
 export default SettingController;
