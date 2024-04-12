@@ -1,6 +1,7 @@
 import ISettingService from "./ISettingService";
 import DBClient from "../../../PrismaClient";
 import { Prisma } from "@prisma/client";
+import errorMiddleware from "../../../middleware/error.middleware";
 
 export class SettingService implements ISettingService {
   readonly _db: DBClient = DBClient.getInstance();

@@ -20,9 +20,11 @@ class SettingController implements IController {
     this.router.post(`${this.path}/change-password`, this.changePassword);
   }
   private getSettingsPage = async (req: Request, res: Response, next: NextFunction) => {
+    const errorMessage = req.query.error;
+    console.log({ errorMessage });
     const isLoggedIn = req.isAuthenticated();
     const user = req.user;
-    res.render("settings/views/settings", { isLoggedIn, user });
+    res.render("settings/views/settings", { isLoggedIn, user, errorMessage });
   };
   private changeUsername = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -31,7 +33,7 @@ class SettingController implements IController {
       this.settingService.changeUsername(userId, newUsername);
       res.redirect("/settings");
     } catch (err) {
-      console.error(err);
+      res.redirect("/settings?error=user%20exists%20already");
     }
   };
   private changeEmail = async (req: Request, res: Response, next: NextFunction) => {
@@ -41,7 +43,7 @@ class SettingController implements IController {
       this.settingService.changeEmail(userId, newEmail);
       res.redirect("/settings");
     } catch (err) {
-      next(err);
+      res.redirect(`/settings?error=email%20exists%20already`);
     }
   };
   private changePassword = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,7 +56,8 @@ class SettingController implements IController {
       this.settingService.changePassword(userId, currentPassword, newPassword);
       res.redirect("/settings");
     } else {
-      throw new Error("The new password and confirm password does not match.");
+      res.redirect("/settings?error=failed%20to%20change%20password");
+      // throw new Error("The new password and confirm password does not match.");
     }
   };
 }

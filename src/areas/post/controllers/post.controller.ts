@@ -35,8 +35,8 @@ class PostController implements IController {
   private getAllPosts = async (req: Request, res: Response) => {
     const isLoggedIn = req.isAuthenticated();
     const user = req.user;
-    const username = user.username;
-    const posts = await this._postService.getAllPosts(username);
+    const userId = user.id;
+    const posts = await this._postService.getAllPosts(userId);
     console.log("posts", posts);
     res.render("post/views/posts", { post: posts, isLoggedIn, user });
     // const postVMList = posts.map((p) => new PostViewModel(p));

@@ -2,7 +2,17 @@ import { Post, User } from "@prisma/client";
 import Header from "../../../components/shared/Header";
 import { Html } from "../../../templates/html-tmpl";
 
-export default ({ post, isLoggedIn, user }: { post: any; isLoggedIn: boolean; user: User }) => {
+export default ({
+  post,
+  isLoggedIn,
+  user,
+  errorMessage,
+}: {
+  post: any;
+  isLoggedIn: boolean;
+  user: User;
+  errorMessage: string;
+}) => {
   return (
     <Html>
       <div class="h-screen bg-gray-200 w-screen">
@@ -11,7 +21,7 @@ export default ({ post, isLoggedIn, user }: { post: any; isLoggedIn: boolean; us
           <div class="w-full max-w-lg mt-3">
             <div class="bg-white rounded-lg shadow-lg p-10">
               <h1 class="text-3xl font-bold mb-3">Settings</h1>
-
+              <div class="text-red-800 text-center">{errorMessage}</div>
               <form action="/settings/change-username" method="post">
                 <div class="col-span-6 sm:col-span-3">
                   <div class="mb-4">

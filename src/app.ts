@@ -10,10 +10,10 @@ class App {
   private readonly _port: number = Number(process.env.PORT) || 5000;
 
   constructor(controllers: Controller[]) {
+    this._app = express();
     dotenv.config();
 
     this.initializeLiveReloadServer();
-    this._app = express();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
     this.initializeErrorHandling();

@@ -5,7 +5,7 @@
 // import { bcrypt } from "bcrypt";
 
 // // FIXME: Don't forget: you shouldn't have the type "any"!
-// export class MockAuthenticationService implements IAuthenticationService {
+// export class hAuthenticationService implements IAuthenticationService {
 //   readonly _db = database;
 
 //   public async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {

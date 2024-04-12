@@ -1,19 +1,12 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import session from "express-session";
 import morgan from "morgan";
 import connectLiveReload from "connect-livereload";
 import { expressExtend } from "jsxte";
-// import Redis from "ioredis";
+import errorMiddleware from "./error.middleware";
 
-// const redis = new Redis({
-//   port: process.env.REDIS_PORT,
-//   host: process.env.REDIS_HOST,
-//   username: "default",
-//   password: process.env.REDIS_PASSWORD,
-// });
-
-module.exports = (app) => {
+module.exports = (app: express.Application) => {
   app.set("views", path.join(__dirname, "..", "areas"));
   expressExtend(app);
   app.use(connectLiveReload());
@@ -23,7 +16,6 @@ module.exports = (app) => {
   app.use(
     session({
       secret: "secret",
-      //store: redis,
       resave: false,
       saveUninitialized: false,
       cookie: {
@@ -33,4 +25,9 @@ module.exports = (app) => {
       },
     })
   );
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    let errorMessage = "ERROR.";
+    // req.session.errorMessage = errorMessage;
+    next();
+  });
 };

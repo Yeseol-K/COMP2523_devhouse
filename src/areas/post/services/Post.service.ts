@@ -18,10 +18,10 @@ export class PostService implements IPostService {
       },
     });
   }
-  async getAllPosts(username: string) {
+  async getAllPosts(userId: string) {
     const user = await this._db.prisma.user.findUnique({
       where: {
-        username: username,
+        id: userId,
       },
       include: {
         following: true,
