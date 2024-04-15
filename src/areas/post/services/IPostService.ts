@@ -3,14 +3,14 @@ import type { Post } from "@prisma/client";
 export default interface IPostService {
   addPost(post: Post, username: string): Promise<Post>;
 
-  getAllPosts(username: string): Promise<Post[]>; // Return an array of Post
+  getAllPosts(username: string): Promise<Post[]>;
 
-  findById(id: string): Promise<Post | null>; // Find a single Post by ID
+  findById(id: string): Promise<Post | null>; 
 
   addCommentToPost(
-    comment: { createdAt: string; userId: string; message: string }, 
+    comment: { createdAt: string, userId: string, message: string }, 
     postId: string
-  ): Promise<void>; // Return the updated Post or null if not found
+  ): Promise<void>; 
 
-  sortPosts(posts: Post[]): Promise<Post[] | null>; // Sort an array of Post
+  sortPosts(posts: Post[]): Promise<Post[] | null>; 
 }

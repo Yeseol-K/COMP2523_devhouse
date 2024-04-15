@@ -15,24 +15,54 @@ export class PostService implements IPostService {
     });
     return post;
   }
+async getAllPosts(userId: string) {
+  const user = await this._db.prisma.user.findUnique({
+    where:{
+      id: userId
+    },
+  })
+  return await this._db.prisma.post.findMany({
+    where: {userId: user.id}
+  })
+}
+  // async getAllPosts(userId: string) {
+  //   const user = await this._db.prisma.user.findUnique({
+  //     where: {
+  //       id: userId,
+  //     },
+  //     include: {
+  //       following: true,
+  //       followers: true,
+  //     },
+  //   });
+  //   const followedUserIds = user.following.map((followedUser) => followedUser.id);
 
-  async getAllPosts(username: string): Promise<Post[]> {
-    const posts = await this._db.prisma.post.findMany({
+  //   return await this._db.prisma.post.findMany({
+  //     where: {
+  //       OR: [{ userId: user.id }, { userId: { in: followedUserIds } }],
+  //     },
+  //     include: {
+  //       user: true,
+  //       // following: true,
+  //       // followers: true,
+  //     },
+  //   });
+  // }
+  async findById(id: string): Promise<Post | undefined> {
+    return await this._db.prisma.post.findUnique({
       where: {
-        userId: username,
+        id: id,
+      },
+      include: {
+        commentList: true,
       },
     });
-    return posts;
   }
 
-  async findById(id: string): Promise<Post | null> {
-    const post = await this._db.prisma.post.findUnique({
-      where: { id },
-    });
-    return post;
-  }
-
-  async addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): Promise<void> {
+  async addCommentToPost(
+    message: { id: string; createdAt: string; userId: string; message: string },
+    postId: string
+  ): Promise<void> {
     throw new Error("Not yet implemented");
   }
 

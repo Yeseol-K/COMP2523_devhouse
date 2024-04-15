@@ -23,7 +23,7 @@ export class AuthenticationService implements IAuthenticationService {
     return isMatch ? user : null;
   }
 
-  async createUser(user: UserDTO): Promise<User> {
+  async createUser(user: User): Promise<User> {
     const passwordHash = await bcrypt.hash(user.password, 10);
     return this._db.prisma.user.create({
       data: {
@@ -33,6 +33,7 @@ export class AuthenticationService implements IAuthenticationService {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
+        role: user.role,
       },
     });
   }

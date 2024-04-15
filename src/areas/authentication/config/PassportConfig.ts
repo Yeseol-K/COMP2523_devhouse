@@ -1,5 +1,4 @@
 //----------------------------------------
-// TODO:                                 |
 //----------------------------------------
 // Configure Passport.js Local Authentication in this file
 // I have written some code to help you get started, and you need to
