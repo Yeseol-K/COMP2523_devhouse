@@ -30,7 +30,8 @@ model Post {
   message     String
   userId      String
   user        User      @relation(fields: [userId], references: [id])
-  createdAt   String    @default("March 26th, 2024")
+  // createdAt   String    @default("March 26th, 2024")
+  createdAt   DateTime    @default(now())
   likes       Int       @default(0)
   commentList Comment[]
   comment     Int       @default(0)
@@ -40,7 +41,8 @@ model Comment {
   id        String  @id
   message   String
   userId    String
-  createdAt String  @default("March 26th, 2024")
+  // createdAt String  @default("March 26th, 2024")
+  createdAt   DateTime    @default(now())
   user      User    @relation(fields: [userId], references: [id])
   Post      Post?   @relation(fields: [postId], references: [id])
   postId    String?
