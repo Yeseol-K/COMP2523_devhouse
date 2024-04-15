@@ -16,18 +16,18 @@ import IPost from "../../../interfaces/post.interface";
 export class PostViewModel {
   public postId: string;
   public userId: string;
-  public createdAt: Date;
+  public createdAt: string;
   public message: string;
   public comments: string;
   public likes: string;
   public commentList?: Array<IComment>;
 
   constructor(post: IPost) {
-    this.postId = post.postId;
+    this.postId = post.id;
     this.userId = post.userId;
     this.createdAt = post.createdAt;
     this.message = post.message;
-    this.comments = post.comments?.toString();
+    this.comments = post.comment?.toString();
     this.likes = post.likes?.toString();
     this.commentList = post.commentList;
   }

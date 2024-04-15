@@ -1,4 +1,6 @@
 import { Html } from "../../../templates/html-tmpl.js";
+import IPost from "../../../interfaces/post.interface.js";
+import { Post } from "@prisma/client";
 
 export default ({ post }: { post: any }) => {
   return (
@@ -8,7 +10,9 @@ export default ({ post }: { post: any }) => {
           <main class="sm:h-full flex-1 flex flex-col min-h-0 min-w-0 overflow-auto">
             <header class="border-b-[1px] border-slate-200 dark:border-neutral-800 w-full p-5 bg-white">
               <div class="flex flex-row items-center gap-2">
-                <h1 class="dark:text-white text-xl font-semibold">DevHouse</h1>
+                <h1 class="text-xl font-semibold">
+                  <a href="/">DevHouse</a>
+                  </h1>
               </div>
             </header>
             <section class="flex-1 pt-3 md:p-6 lg:mb-0 lg:min-h-0 lg:min-w-0">
@@ -18,12 +22,12 @@ export default ({ post }: { post: any }) => {
                     <div class="font-sans rounded border px-6 py-4 max-w-md">
                       <div class="flex items-center">
                         <img
-                          src="https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg"
+                          src={post.user.profilePicture}
                           class="h-12 w-12 rounded-full"
                         />
                         <div class="flex flex-col ml-4">
                           <a class="font-bold text-black" href="#">
-                            {post.userId}
+                            {post.id}
                           </a>
                           <span class="text-grey">{post.userId}</span>
                         </div>
@@ -32,12 +36,12 @@ export default ({ post }: { post: any }) => {
                       <div class="text-grey mb-3 text-sm">{post.createdAt}</div>
                       <div class="flex text-grey">
                         <div class="flex items-center mr-4">
-                          svg was here
-                          <span>{post.comments} </span>
+                          
+                          <span>{post.comment} </span>
                         </div>
-                        <div class="flex items-center mr-4">svg was here</div>
+                        <div class="flex items-center mr-4"></div>
                         <div class="flex items-center">
-                          svg was here
+                          
                           <span>{post.likes}</span>
                         </div>
                       </div>
@@ -46,28 +50,28 @@ export default ({ post }: { post: any }) => {
                   <div class=" w-full min-h-0 min-w-0 mb-4">
                     <div class="flex mx-auto items-center justify-center shadow-lg mt-25 mx-8 mb-4 max-w-lg">
                       <form
-                        action="/posts/<%= post.postId %>/comment"
+                        action={`/posts/${post.id}/comment`}
                         method="post"
                         class="w-full max-w-xl bg-white rounded-lg px-4 pt-2"
                       >
                         <div class="flex flex-wrap -mx-3 mb-6">
                           <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
                           <div class="w-full md:w-full px-3 mb-2 mt-2">
-                            <textarea
+                            <input
                               name="commentText"
                               class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
                               placeholder="Type Your Comment"
                               required
-                            ></textarea>
+                            ></input>
                           </div>
                           <div class="w-full md:w-full flex items-start md:w-full px-3">
-                            <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto">SVG was here</div>
+                            <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto"></div>
                             <div class="-mr-1">
                               <input
                                 type="submit"
                                 class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
-                                value="Post Comment"
-                              />
+                                value="Post Comment">
+                              </input>
                             </div>
                           </div>
                         </div>
@@ -81,8 +85,8 @@ export default ({ post }: { post: any }) => {
                 <div class="bg-gray-100 w-full h-full min-h-0 min-w-0 overflow-auto rounded-lg">
                   {post.commentList.map((comment) => (
                     <div class="w-full h-34 mt-3">
-                      <div class="flex items-center dark:bg-gray-800">
-                        <div class="text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                      <div class="flex items-center">
+                        <div class="text-black p-4 antialiased flex max-w-lg">
                           <img
                             class="rounded-full h-8 w-8 mr-2 mt-1 "
                             src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80"
@@ -97,8 +101,8 @@ export default ({ post }: { post: any }) => {
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  ))}                 
+                </div> 
               </div>
             </section>
           </main>
