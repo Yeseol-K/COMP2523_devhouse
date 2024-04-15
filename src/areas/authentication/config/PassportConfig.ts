@@ -1,17 +1,17 @@
-import IUser from "../../../interfaces/user.interface";
+import type { User } from "@prisma/client";
 import passport from "passport";
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
 import { IAuthenticationService } from "../services/IAuthentication.service";
 import FormValidater from "../../../helper/FormValidator";
 
-declare global {
-  namespace Express {
-    interface User extends IUser {
-      email: string;
-      id: string;
-    }
-  }
-}
+// declare global {
+//   namespace Express {
+//     interface User extends User {
+//       email: string;
+//       id: string;
+//     }
+//   }
+// }
 
 export default class PassportConfig {
   private _name: string;
@@ -33,10 +33,10 @@ export default class PassportConfig {
         }
         const user = await this._authenticationService.getUserByEmailAndPassword(email, password);
         if (user) {
-          console.log("done")
+          console.log("done");
           done(null, user);
         } else {
-          console.log("nope")
+          console.log("nope");
           done(null, false, { error: "problem with login info " });
         }
       }
@@ -50,7 +50,7 @@ export default class PassportConfig {
   }
 
   private serializeUser(passport: any) {
-    passport.serializeUser(function (user: IUser, done: (err: null | object, id: string) => void) {
+    passport.serializeUser(function (user: User, done: (err: null | object, id: string) => void) {
       if (user) {
         done(null, user.id);
       } else {

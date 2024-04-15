@@ -31,9 +31,6 @@ class AuthenticationController implements IController {
 
   private showLoginPage = (req: express.Request, res: express.Response) => {
     const errorMessage = req.query.error;
-    if (errorMessage) {
-      //new EmailAlreadyExistsException(email)
-    }
     res.render("authentication/views/login", { errorMessage });
   };
 
@@ -45,7 +42,6 @@ class AuthenticationController implements IController {
     res.render("authentication/views/register", { errorMessage });
   };
 
-  // 🔑 These Authentication methods needs to be implemented by you
   private login = passport.authenticate("local", {
     successRedirect: "/posts",
     failureRedirect: "/auth/login", 
@@ -65,7 +61,6 @@ class AuthenticationController implements IController {
         firstName, 
         lastName,
         password,
-        profilePicture: ""
       })
       res.redirect("/auth/login");
     }

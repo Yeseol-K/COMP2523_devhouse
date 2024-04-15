@@ -1,5 +1,5 @@
 import type { User } from "@prisma/client";
-export type UserDTO = Omit<User, "id">;
+export type UserDTO = Omit<User, "id" | "profilePicture">;
 
 export interface IAuthenticationService {
   findUserByEmail(email: String): Promise<User>;

@@ -1,74 +1,105 @@
-import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import DBClient from "../../../PrismaClient";
-import type { User, Comment } from "@prisma/client";
-import IComment from "../../../interfaces/comment.interface";
+import type { User, Comment, Post } from "@prisma/client";
 
-
-// ❗️ Implement this class much later, once everything works fine with your mock db
 export class PostService implements IPostService {
   readonly _db: DBClient = DBClient.getInstance();
 
-  async addPost(post: IPost, username: string): Promise<void> {
+  async addPost(post: Post, username: string): Promise<void> {
     await this._db.prisma.post.create({
       data: {
         id: post.id,
         message: post.message,
-        userId: post.userId
-      }
-    })
+        userId: post.userId,
+      },
+    });
   }
-  async getAllPosts(username: string): Promise<IPost[]> {
+  async getAllPosts(username: string): Promise<Post[]> {
     const user: User = await this._db.prisma.user.findUnique({
       where: {
         username: username,
       },
       include: {
-        following: true
-      }
-    })
+        following: true,
+      },
+    });
     //@ts-ignore
-    let following = user.following.map((u) => u.id)
+    let following = user.following.map((u) => u.id);
     return await this._db.prisma.post.findMany({
       where: {
         OR: [
           {
-            userId: user.id
+            userId: user.id,
           },
           {
-            userId: { in: following }
-          }
+            userId: { in: following },
+          },
         ],
       },
       include: {
-        user: true
-      }
-    })
+        user: true,
+      },
+    });
   }
-  async findById(id: string): Promise<IPost | undefined> {
+  async findById(id: string): Promise<Post | undefined> {
     return await this._db.prisma.post.findUnique({
       where: {
-        id: id
+        id: id,
       },
       include: {
         commentList: true,
-        user: true
-      }
-    })
+        user: true,
+      },
+    });
   }
-  async addCommentToPost(message: IComment): Promise<void> {
+  async addCommentToPost(message: Comment): Promise<void> {
     await this._db.prisma.comment.create({
       data: {
         id: message.id,
         message: message.message,
         createdAt: message.createdAt,
         userId: message.userId,
-        postId: message.postId
-      }
-    })
+        postId: message.postId,
+      },
+    });
   }
 
-  sortPosts(posts: IPost[]): Promise<IPost[]> {
-    throw new Error("Sorting not implemented yet")
+  sortPosts(posts: Post[]): Post[] {
+    return posts.sort((a, b) => convertDate(b.createdAt) - convertDate(a.createdAt));
   }
+
+  async deletePost(id: string): Promise<void> {
+    await this._db.prisma.post.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
+}
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+function convertDate(createdAt: string) {
+  console.log(createdAt);
+  const [m, d, y] = createdAt.split(" ");
+  let month = String(months.indexOf(m) + 1);
+  let day = d.slice(0, -3);
+  console.log(day);
+  let year = y;
+  let date = Date.parse(`${month}, ${day}, ${year}`);
+  console.log(date);
+  return date;
 }
