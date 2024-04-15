@@ -33,9 +33,7 @@ class PostController implements IController {
 
   private getAllPosts = async (req: Request, res: Response) => {
     const isLoggedIn = req.isAuthenticated();
-    //!!! wtf is this typing error
-    //@ts-ignore
-    const user: User = req.user;
+    const user = req.user as User;
     const username = user.username;
     const posts = await this._service.getAllPosts(username);
     const sortedPosts = this._service.sortPosts(posts);
@@ -51,14 +49,13 @@ class PostController implements IController {
 
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
     console.log("creating comment");
-    const user = req.user;
+    const user = req.user as User;
     const postId = req.params.id;
     const message = req.body.commentText;
 
     this._service.addCommentToPost({
       id: randomUUID(),
       message: message,
-      //@ts-ignore
       userId: user.id,
       createdAt: new Date().toDateString(),
       postId: postId,
@@ -67,8 +64,7 @@ class PostController implements IController {
   };
   private createPost = async (req: Request, res: Response, next: NextFunction) => {
     const message = req.body.message;
-    //@ts-ignore
-    const user: User = req.user;
+    const user = req.user as User;
     const post: Post = {
       message: message,
       userId: user.id,
@@ -87,8 +83,7 @@ class PostController implements IController {
   };
   private getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
     const isLoggedIn = req.isAuthenticated();
-    //@ts-ignore
-    const user: User = req.user;
+    const user = req.user as User;
     const username = user.username;
     const users = await this._db.prisma.user.findMany({
       where: {
@@ -102,8 +97,7 @@ class PostController implements IController {
     res.render("post/views/users", { user, isLoggedIn, users: filteredUsers });
   };
   private followUser = async (req: Request, res: Response, next: NextFunction) => {
-    //@ts-ignore
-    const user: User = req.user;
+    const user = req.user as User;
     const followId: string = req.params.id;
     const userToFollow = await this._userService.getUserById(followId);
     const newFollow = await this._db.prisma.user.update({
