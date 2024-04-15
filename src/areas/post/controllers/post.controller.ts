@@ -58,7 +58,6 @@ class PostController implements IController {
     this._service.addCommentToPost({
       id: randomUUID(),
       message: message,
-      //!!! wtf is this typing error
       //@ts-ignore
       userId: user.id,
       createdAt: new Date().toDateString(),
@@ -68,7 +67,6 @@ class PostController implements IController {
   };
   private createPost = async (req: Request, res: Response, next: NextFunction) => {
     const message = req.body.message;
-    //!!! wtf is this typing error
     //@ts-ignore
     const user: User = req.user;
     const post: Post = {
@@ -89,7 +87,6 @@ class PostController implements IController {
   };
   private getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
     const isLoggedIn = req.isAuthenticated();
-    //!!! wtf is this typing error
     //@ts-ignore
     const user: User = req.user;
     const username = user.username;
@@ -105,7 +102,6 @@ class PostController implements IController {
     res.render("post/views/users", { user, isLoggedIn, users: filteredUsers });
   };
   private followUser = async (req: Request, res: Response, next: NextFunction) => {
-    //!!! wtf is this typing error
     //@ts-ignore
     const user: User = req.user;
     const followId: string = req.params.id;
