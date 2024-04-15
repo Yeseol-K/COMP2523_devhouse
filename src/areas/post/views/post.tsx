@@ -1,4 +1,5 @@
 import { Html } from "../../../templates/html-tmpl.js";
+import { Post, User } from "@prisma/client";
 
 export default ({ post }: { post: any }) => {
   return (

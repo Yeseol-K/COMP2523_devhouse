@@ -1,6 +1,6 @@
 import { Html } from "../../../templates/html-tmpl";
 
-export default () => {
+export default ({ errorMessage }: { errorMessage: string }) => {
   return (
     <Html>
       <div class="bg-white font-family-karla h-screen">
@@ -19,6 +19,7 @@ export default () => {
 
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
               <p class="text-center font-bold text-3xl">Welcome back</p>
+              <div class="text-red-800 text-center">{errorMessage}</div>
               <form class="flex flex-col" method="post" action="/auth/login">
                 <div class="flex flex-col">
                   <label for="email" class="text-lg">

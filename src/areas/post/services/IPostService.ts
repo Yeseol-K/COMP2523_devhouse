@@ -1,17 +1,37 @@
 import IPost from "../../../interfaces/post.interface";
+import { Post } from "@prisma/client";
 
 // ⭐️ Feel free to change this interface in any way you like. It is simply an example...
 export default interface IPostService {
-  addPost(post: IPost, username: string): void;
+  addPost(post: Post, username: string): Promise<void>;
 
-  sortPosts(posts: IPost[]): IPost[];
+  sortPosts(posts: Post[]): Promise<Post[]>;
 
-  getAllPosts(username: string): IPost[];
+  getAllPosts(username: string): Promise<
+    ({
+      user: {
+        id: string;
+        username: string;
+        email: string;
+        password: string;
+        firstName: string;
+        lastName: string;
+        profilePicture: string;
+      };
+    } & {
+      id: string;
+      message: string;
+      userId: string;
+      createdAt: Date;
+      likes: number;
+      comment: number;
+    })[]
+  >;
 
-  findById(id: string): IPost | undefined;
+  findById(id: string): Promise<Post | undefined>;
 
   addCommentToPost(
     message: { id: string; createdAt: string; userId: string; message: string },
     postId: string
-  ): IPost | void;
+  ): Post | void;
 }
