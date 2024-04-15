@@ -33,9 +33,7 @@ class PostController implements IController {
 
   private getAllPosts = async (req: Request, res: Response) => {
     const isLoggedIn = req.isAuthenticated();
-    //!!! wtf is this typing error
-    //@ts-ignore
-    const user: User = req.user;
+    const user = req.user as User;
     const username = user.username;
     const posts = await this._service.getAllPosts(username);
     const sortedPosts = this._service.sortPosts(posts);
@@ -67,8 +65,7 @@ class PostController implements IController {
   };
   private createPost = async (req: Request, res: Response, next: NextFunction) => {
     const message = req.body.message;
-    //@ts-ignore
-    const user: User = req.user;
+    const user = req.user as User;
     const post: Post = {
       message: message,
       userId: user.id,

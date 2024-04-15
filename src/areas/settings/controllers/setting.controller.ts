@@ -3,28 +3,29 @@ import IController from "../../../interfaces/controller.interface";
 import ISettingService from "../services/ISettingService";
 import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import { User } from "@prisma/client";
-
 class SettingController implements IController {
   public path = "/settings";
   public router = Router();
   settingService: ISettingService;
 
   constructor(settingService: ISettingService) {
-    this.settingService = settingService;
     this.initializeRoutes();
+    this.settingService = settingService;
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/`, this.getSettingsPage);
+    this.router.get(`${this.path}/`, ensureAuthenticated, this.getSettingsPage);
     this.router.post(`${this.path}/change-username`, this.changeUsername);
     this.router.post(`${this.path}/change-email`, this.changeEmail);
     this.router.post(`${this.path}/change-password`, this.changePassword);
   }
   private getSettingsPage = async (req: Request, res: Response, next: NextFunction) => {
-    const errorMessage = req.query.error;
+    console.log("HIII");
+    const errorMessage = req.query.error || "";
     console.log({ errorMessage });
     const isLoggedIn = req.isAuthenticated();
     const user = req.user;
+    console.log(user);
     res.render("settings/views/settings", { isLoggedIn, user, errorMessage });
   };
   private changeUsername = async (req: Request, res: Response, next: NextFunction) => {
@@ -43,7 +44,7 @@ class SettingController implements IController {
       const newEmail = req.body.newEmail;
       const user = req.user as User;
       const userId = user.id;
-      this.settingService.changeEmail(userId, newEmail);
+      await this.settingService.changeEmail(userId, newEmail);
       res.redirect("/settings");
     } catch (err) {
       res.redirect(`/settings?error=email%20exists%20already`);
@@ -57,11 +58,10 @@ class SettingController implements IController {
     const newPassword = req.body.newPassword;
     const confirmPassword = req.body.confirmNewPassword;
     if (newPassword === confirmPassword) {
-      this.settingService.changePassword(userId, currentPassword, newPassword);
+      await this.settingService.changePassword(userId, currentPassword, newPassword);
       res.redirect("/settings");
     } else {
       res.redirect("/settings?error=failed%20to%20change%20password");
-      // throw new Error("The new password and confirm password does not match.");
     }
   };
 }

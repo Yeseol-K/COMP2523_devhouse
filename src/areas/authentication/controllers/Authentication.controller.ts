@@ -37,16 +37,16 @@ class AuthenticationController implements IController {
   private showRegistrationPage = (req: express.Request, res: express.Response) => {
     let errorMessage = req.query.error;
     if (errorMessage) {
-      errorMessage = `User with email ${errorMessage} already exists`
+      errorMessage = `User with email ${errorMessage} already exists`;
     }
     res.render("authentication/views/register", { errorMessage });
   };
 
   private login = passport.authenticate("local", {
     successRedirect: "/posts",
-    failureRedirect: "/auth/login", 
-    failureMessage: true
-  })
+    failureRedirect: "/auth/login?error=failed%20login",
+    failureMessage: true,
+  });
 
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const { email, password, username, firstName, lastName } = req.body;
@@ -58,10 +58,10 @@ class AuthenticationController implements IController {
       const createdUser = this._service.createUser({
         email,
         username,
-        firstName, 
+        firstName,
         lastName,
         password,
-      })
+      });
       res.redirect("/auth/login");
     }
   };

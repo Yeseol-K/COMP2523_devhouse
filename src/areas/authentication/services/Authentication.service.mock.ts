@@ -1,8 +1,9 @@
+// @ts-nocheck
 import { database } from "../../../model/fakeDB";
 import { IAuthenticationService, UserDTO } from "./IAuthentication.service";
 import { randomUUID } from "node:crypto";
 import type { User } from "@prisma/client";
-import bcrypt  from "bcrypt";
+import bcrypt from "bcrypt";
 
 // FIXME: Don't forget: you shouldn't have the type "any"!
 export class MockAuthenticationService implements IAuthenticationService {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import IPostService from "./IPostService";
 import DBClient from "../../../PrismaClient";
 import type { User, Comment, Post } from "@prisma/client";

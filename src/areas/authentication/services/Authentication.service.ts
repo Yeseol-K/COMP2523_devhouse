@@ -3,7 +3,7 @@ import DBClient from "../../../PrismaClient";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService, UserDTO } from "./IAuthentication.service";
 import type { User } from "@prisma/client";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 
 export class AuthenticationService implements IAuthenticationService {
   readonly _db: DBClient = DBClient.getInstance();
@@ -21,30 +21,30 @@ export class AuthenticationService implements IAuthenticationService {
     return await this._db.prisma.user.findUnique({
       where: {
         email: email,
-        password: password
-      }
-    })
+        password: password,
+      },
+    });
   }
   async createUser(user: UserDTO): Promise<User> {
-    const id = randomUUID()
+    const id = randomUUID();
     //const passwordHash = bcrypt.hashSync(user.password, 10)
     return await this._db.prisma.user.create({
       data: {
-        id: id, 
+        id: id,
         password: user.password,
         username: user.username,
-        email: user.email, 
-        firstName: user.firstName, 
-        lastName: user.lastName
-      }
-    })
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+    });
   }
 
   async getUserById(id: string): Promise<User | null> {
     return await this._db.prisma.user.findUnique({
       where: {
-        id: id
-      }
-    })
+        id: id,
+      },
+    });
   }
 }

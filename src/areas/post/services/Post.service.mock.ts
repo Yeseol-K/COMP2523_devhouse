@@ -1,3 +1,4 @@
+// @ts-nocheck
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 
