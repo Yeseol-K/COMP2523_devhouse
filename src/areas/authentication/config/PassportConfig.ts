@@ -1,24 +1,17 @@
-//----------------------------------------
-// TODO:                                 |
-//----------------------------------------
-// Configure Passport.js Local Authentication in this file
-// I have written some code to help you get started, and you need to
-// finish it off 🚀 Make sure to replace the "any" type.
-
-import IUser from "../../../interfaces/user.interface";
+import type { User } from "@prisma/client";
 import passport from "passport";
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
 import { IAuthenticationService } from "../services/IAuthentication.service";
 import FormValidater from "../../../helper/FormValidator";
 
-declare global {
-  namespace Express {
-    interface User extends IUser {
-      email: string;
-      id: string;
-    }
-  }
-}
+// declare global {
+//   namespace Express {
+//     interface User extends User {
+//       email: string;
+//       id: string;
+//     }
+//   }
+// }
 
 export default class PassportConfig {
   private _name: string;
@@ -36,14 +29,15 @@ export default class PassportConfig {
       },
       async (email: string, password: string, done: any) => {
         if (FormValidater.IsEmpty(email) || FormValidater.IsEmpty(password)) {
-          // show some error
+          return;
+        }
+        const user = await this._authenticationService.getUserByEmailAndPassword(email, password);
+        if (user) {
+          console.log("done");
+          done(null, user);
         } else {
-          const user = await this._authenticationService.getUserByEmailAndPassword(email, password);
-          if (user) {
-            done(null, user);
-          } else {
-            done(null, false, { error: "problem with login info " });
-          }
+          console.log("nope");
+          done(null, false, { error: "problem with login info " });
         }
       }
     );
@@ -56,7 +50,7 @@ export default class PassportConfig {
   }
 
   private serializeUser(passport: any) {
-    passport.serializeUser(function (user: IUser, done: (err: null | object, id: string) => void) {
+    passport.serializeUser(function (user: User, done: (err: null | object, id: string) => void) {
       if (user) {
         done(null, user.id);
       } else {
@@ -66,8 +60,6 @@ export default class PassportConfig {
   }
 
   private deserializeUser(passport: any) {
-    //  const that = this; worse case scenario
-    // maybe look into .bind (might be useful)
     passport.deserializeUser(
       async function (id: Express.User, done: (err: null | object, user?: Express.User | false | null) => void) {
         let user = await this._authenticationService.getUserById(id);
