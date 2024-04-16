@@ -22,9 +22,15 @@ class SettingController implements IController {
   private getSettingsPage = async (req: Request, res: Response, next: NextFunction) => {
     res.render("settings/views/settings");
   };
-  private changeUsername = async (req: Request, res: Response, next: NextFunction) => {};
-  private changeEmail = async (req: Request, res: Response, next: NextFunction) => {};
-  private changePassword = async (req: Request, res: Response, next: NextFunction) => {};
+  private changeUsername = async (req: Request, res: Response, next: NextFunction) => {
+
+  };
+  private changeEmail = async (req: Request, res: Response, next: NextFunction) => {
+
+  };
+  private changePassword = async (req: Request, res: Response, next: NextFunction) => {
+    
+  };
 }
 
 export default SettingController;

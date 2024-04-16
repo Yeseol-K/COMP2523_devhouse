@@ -30,7 +30,7 @@ model Post {
   message     String
   userId      String
   user        User      @relation(fields: [userId], references: [id])
-  createdAt   String    @default("March 26th, 2024")
+  createdAt   String    
   likes       Int       @default(0)
   commentList Comment[]
   comment     Int       @default(0)

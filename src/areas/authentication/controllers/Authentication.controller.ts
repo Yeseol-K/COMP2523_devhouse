@@ -1,12 +1,12 @@
 import express, { Request, Response } from "express";
 import IController from "../../../interfaces/controller.interface";
 import { IAuthenticationService } from "../services";
-import { randomUUID } from "node:crypto";
+// import { randomUUID } from "node:crypto";
 import passport from "passport";
 import PassportConfig from "../config/PassportConfig";
-import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
-import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
-import { User } from "@prisma/client";
+// import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
+// import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
+// import { User } from "@prisma/client";
 
 class AuthenticationController implements IController {
   public path = "/auth";

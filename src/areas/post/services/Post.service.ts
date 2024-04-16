@@ -11,6 +11,7 @@ export class PostService implements IPostService {
         id: post.id,
         message: post.message,
         userId: post.userId,
+        createdAt: post.createdAt,
       },
     });
   }

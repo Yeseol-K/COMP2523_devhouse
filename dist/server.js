@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const post_controller_1 = __importDefault(require("./areas/post/controllers/post.controller"));
 const Authentication_controller_1 = __importDefault(require("./areas/authentication/controllers/Authentication.controller"));
+// import { MockAuthenticationService } from "./areas/authentication/services/Authentication.service.mock";
 const services_1 = require("./areas/post/services");
 const Landing_controller_1 = __importDefault(require("./areas/landing/controllers/Landing.controller"));
 const services_2 = require("./areas/authentication/services");

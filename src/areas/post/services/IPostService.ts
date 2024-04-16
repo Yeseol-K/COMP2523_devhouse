@@ -1,5 +1,3 @@
-import IComment from "../../../interfaces/comment.interface";
-import IPost from "../../../interfaces/post.interface";
 import type { Post, Comment } from "@prisma/client";
 
 export default interface IPostService {

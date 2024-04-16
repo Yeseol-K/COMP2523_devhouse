@@ -3,10 +3,10 @@ import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { IAuthenticationService } from "../../../areas/authentication/services/IAuthentication.service";
 import DBClient from "../../../PrismaClient";
-import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
+// import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import { randomUUID } from "crypto";
 import type { User, Post } from "@prisma/client";
-import { UserDTO } from "../../../areas/authentication/services/IAuthentication.service";
+// import { UserDTO } from "../../../areas/authentication/services/IAuthentication.service";
 
 class PostController implements IController {
   public path = "/posts";
@@ -33,9 +33,7 @@ class PostController implements IController {
 
   private getAllPosts = async (req: Request, res: Response) => {
     const isLoggedIn = req.isAuthenticated();
-    //!!! wtf is this typing error
-    //@ts-ignore
-    const user: User = req.user;
+    const user = req.user as User;
     const username = user.username;
     const posts = await this._service.getAllPosts(username);
     const sortedPosts = this._service.sortPosts(posts);
@@ -51,14 +49,13 @@ class PostController implements IController {
 
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
     console.log("creating comment");
-    const user = req.user;
+    const user = req.user as User;
     const postId = req.params.id;
     const message = req.body.commentText;
 
     this._service.addCommentToPost({
       id: randomUUID(),
       message: message,
-      //@ts-ignore
       userId: user.id,
       createdAt: new Date().toDateString(),
       postId: postId,
@@ -67,8 +64,7 @@ class PostController implements IController {
   };
   private createPost = async (req: Request, res: Response, next: NextFunction) => {
     const message = req.body.message;
-    //@ts-ignore
-    const user: User = req.user;
+    const user= req.user as User;
     const post: Post = {
       message: message,
       userId: user.id,
@@ -87,8 +83,7 @@ class PostController implements IController {
   };
   private getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
     const isLoggedIn = req.isAuthenticated();
-    //@ts-ignore
-    const user: User = req.user;
+    const user= req.user as User;
     const username = user.username;
     const users = await this._db.prisma.user.findMany({
       where: {
