@@ -29,6 +29,8 @@ Understand the code and fill in the missing code for strategies.
 * March 26 - Working on chaning all IPost and IUser to prisma Post and User. However, having error on User DTO. Attempting to fix.
 * April 2 - Worked on fixing all user post related issues and Post page show.
 * April 6 - Fixing auth issue after post page.
+* April 14 - Fixing post issue for ;
+* April 15 - Worked on following. Group merged new to main, worked on having it work on my machine.
 
   
 ## Kyle:
