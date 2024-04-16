@@ -12,6 +12,8 @@
 - Mar 25th : - connect with Prisma (2hrs)
 - Mar 26th : - view the posts, date and followers (full class + Ed class + 6hrs)
 - Apr 11th : - Settings, change username/email/password (need to add error handle for user) (5hrs)
+- Apr 15th : - merge conflict, add setting error, fix type error (need to change the post creatDate type string to Datetime) (3hrs)
+
 
 ## Christy:
 
