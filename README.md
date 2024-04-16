@@ -52,4 +52,10 @@ I worked on the following tasks:
 
 I worked on the following tasks:
 
-- worked on reading/understanding code, create/edit logic for login, finish config for passport and authentication
+- 2 hours Mar 11 worked on reading/understanding code, create/edit logic for login,
+- 1 hour Mar 13 finish logic for login
+- 1.5 hour Mar 15 finish config for passport and authentication
+- 2.5 hours Mar 25 set up prisma, understand redis
+- 2.5 hours Apr 2 work on posts page
+- 2 hours Apr 8 fix bugs for auth
+- 2 hours April 15th, merging
