@@ -243,7 +243,8 @@ export default () => {
                   </div>
                 </div>
                 <blockquote class="mt-8 text-lg text-gray-500">
-                  "Thanks for creating this service. My life is so much easier. Thanks for making such a great product."
+                  "I guess this isn't terrible. I didn't throw up when I saw it. Though sometimes I wonder if social
+                  media is really a positive force in society."
                 </blockquote>
               </div>
               <div class="flex flex-col items-start justify-start w-full h-auto lg:w-1/3">

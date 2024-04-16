@@ -1,17 +1,19 @@
 import Header from "../../../components/shared/Header";
 import { Html } from "../../../templates/html-tmpl";
 
-export default ({ post, isLoggedIn, username }: { post: any; isLoggedIn: boolean; username: string }) => {
+export default ({ isLoggedIn, user, errorMessage }: any) => {
   return (
     <Html>
       <div class="h-screen bg-gray-200 w-screen">
         <main class="flex-1 flex flex-col w-screen items-center">
-          <Header isLoggedIn={isLoggedIn} username={username} />
+          <Header isLoggedIn={isLoggedIn} username={user?.username} />
           <div class="w-full max-w-lg mt-3">
             <div class="bg-white rounded-lg shadow-lg p-10">
               <h1 class="text-3xl font-bold mb-3">Settings</h1>
-
-              <form action="/setting/change-username" method="post">
+              <div class="p-4 mb-4 text-sm text-red-800 rounded-lg dark:text-red-400" role="alert">
+                {errorMessage}
+              </div>
+              <form action="/settings/change-username" method="post">
                 <div class="col-span-6 sm:col-span-3">
                   <div class="mb-4">
                     <label for="newUsername" class="block text-sm font-medium text-gray-700 mb-2">
@@ -34,7 +36,7 @@ export default ({ post, isLoggedIn, username }: { post: any; isLoggedIn: boolean
                   </div>
                 </div>
               </form>
-              <form action="/setting/change-email" method="post">
+              <form action="/settings/change-email" method="post">
                 <div class="col-span-6 sm:col-span-3">
                   <div class="mb-4">
                     <label for="newEmail" class="block text-sm font-medium text-gray-700 mb-2">
@@ -59,7 +61,7 @@ export default ({ post, isLoggedIn, username }: { post: any; isLoggedIn: boolean
                 </div>
               </form>
 
-              <form action="/setting/change-password" method="post">
+              <form action="/settings/change-password" method="post">
                 <div class="mb-4">
                   <label class="block text-sm font-medium text-gray-700 mb-2" for="currentPassword">
                     Current Password:

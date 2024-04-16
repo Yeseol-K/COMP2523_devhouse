@@ -9,14 +9,14 @@ import { SettingService } from "./areas/settings/services";
 import { AuthenticationService } from "./areas/authentication/services";
 import { PrismaClient } from "@prisma/client";
 
-const db = new PrismaClient();
+// const db = new PrismaClient();
 
 const server = new App([
+  new SettingController(new SettingService()),
   new LandingController(),
   new PostController(new PostService(), new AuthenticationService()),
   // new PostController(new PostService()),
   new AuthenticationController(new AuthenticationService()),
-  // new SettingController(new SettingService()),
 ]);
 
 server.start();
